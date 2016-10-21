@@ -10,5 +10,15 @@
 	<packaging>jar</packaging>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.orion10110.training.managertaxi</groupId>
+			<artifactId>dao-impl-db</artifactId>
+		</dependency>
+
+
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+		</dependency>
 	</dependencies>
 </project>

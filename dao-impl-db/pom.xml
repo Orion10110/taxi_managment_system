@@ -8,6 +8,17 @@
   <artifactId>dao-impl-db</artifactId>
   <packaging>jar</packaging>
 
-	<dependencies>
+		<dependencies>
+
+		<dependency>
+			<groupId>com.orion10110.training.managertaxi</groupId>
+			<artifactId>datamodel</artifactId>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
 	</dependencies>
 </project>
