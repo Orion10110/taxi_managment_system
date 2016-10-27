@@ -7,7 +7,7 @@ import com.orion10110.taximanager.datamodel.Brand;
 public interface BrandDao {
 	 	Brand get(Long id);
 
-	    void insert(Brand entity);
+	    Long insert(Brand entity);
 
 	    void update(Brand entity);
 

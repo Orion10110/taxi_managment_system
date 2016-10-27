@@ -7,7 +7,7 @@ import com.orion10110.taximanager.datamodel.Brand;
 public interface BrandSevices {
 	 void saveAll(List<Brand> brand);
 
-	    void save(Brand brand);
+	    Long save(Brand brand);
 
-	    boolean isDaoExist();
+	    Brand get(Long id);
 }
