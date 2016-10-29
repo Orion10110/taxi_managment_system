@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -59,9 +60,9 @@ implements GenericDao<T, PK> {
 				
 	        }, keyHolder);
 
-		
+		  	Long key =  keyHolder.getKey().longValue();
 
-	        return (PK) transientObject.getId();
+	        return (PK)key;
 	}
 
 	@Override

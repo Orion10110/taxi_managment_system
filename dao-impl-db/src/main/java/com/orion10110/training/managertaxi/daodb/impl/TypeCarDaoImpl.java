@@ -5,14 +5,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.orion10110.taximanager.datamodel.TypeCar;
 import com.orion10110.training.managertaxi.daodb.TypeCarDao;
 
 @Repository
-public class TypeCarDaoImpl extends GenericDaoImpl<TypeCar, Long>{
+public class TypeCarDaoImpl extends GenericDaoImpl<TypeCar,Long> implements TypeCarDao{
 
+	
 	@Override
 	protected void setParamsForInsert(PreparedStatement ps, TypeCar entity) throws SQLException {
 		ps.setString(1, entity.getType());

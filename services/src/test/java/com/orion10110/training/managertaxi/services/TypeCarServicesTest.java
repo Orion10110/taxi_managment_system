@@ -5,11 +5,12 @@ import javax.inject.Inject;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.orion10110.taximanager.datamodel.TypeCar;
-import com.orion10110.training.managertaxi.services.TypeCarServices;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:service-context.xml")
@@ -17,16 +18,10 @@ public class TypeCarServicesTest {
 	@Inject
 	private TypeCarServices typeCarServices;
 
-	@Test
-	public void getByIdTest() {
-		TypeCar typeCar = typeCarServices.get(1l);
-
-		Assert.assertNotNull("typeCar for id=1 should not be null", typeCar);
-		Assert.assertEquals(new Long(1), typeCar.getId());
-	}
+	
 
 	@Test
-	public void saveBrendTest() {
+	public void saveTypeTest() {
 		TypeCar typeCar = new TypeCar();
 		typeCar.setType("test type");
 

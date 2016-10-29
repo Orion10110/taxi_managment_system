@@ -6,12 +6,6 @@ import com.orion10110.taximanager.datamodel.Brand;
 import com.orion10110.taximanager.datamodel.TypeCar;
 
 
-public interface TypeCarServices {
-	void saveAll(List<TypeCar> typeCar);
+public interface TypeCarServices extends GenericService<TypeCar,Long>{
 
-	Long save(TypeCar TypeCar);
-
-	TypeCar get(Long id);
-
-	Long delete(Long id);
 }
