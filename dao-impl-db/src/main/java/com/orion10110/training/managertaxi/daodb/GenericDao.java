@@ -6,11 +6,11 @@ import java.util.List;
 public interface GenericDao <T, PK extends Serializable>  {
 	PK insert(T newInstance);
 
-	void delete(T persistentObject);
+	void delete(PK id);
 
 	T get(PK id);
 
-	T update(T transientObject);
+	void update(T transientObject);
 	
 	List<T> getAll();
 }

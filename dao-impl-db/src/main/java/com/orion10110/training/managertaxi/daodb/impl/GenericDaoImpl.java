@@ -1,6 +1,8 @@
 package com.orion10110.training.managertaxi.daodb.impl;
 
 import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -13,25 +15,36 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 
+import com.orion10110.taximanager.datamodel.AbstractModel;
 import com.orion10110.taximanager.datamodel.Brand;
 import com.orion10110.training.managertaxi.daodb.GenericDao;
 
-public abstract class GenericDaoImpl  <T, PK extends Serializable> 
+@Repository
+public abstract class GenericDaoImpl  <T extends AbstractModel, PK extends Serializable> 
 implements GenericDao<T, PK> {
 	
-	
-	
-	protected abstract Class<T> getType();
+	protected abstract void setParamsForInsert(PreparedStatement ps,T entity) throws SQLException;
+	protected abstract List<Object> setParamsForUpdate(T entity);
+	protected Class<? extends T> daoType;
 	protected abstract String getTable();
+	protected abstract String getSqlSelectList() ;
 	protected abstract String getSqlInsert();
+	protected abstract String getSqlUpdate();
+	public GenericDaoImpl() {
+        Type t = getClass().getGenericSuperclass();
+        ParameterizedType pt = (ParameterizedType) t;
+        daoType = (Class) pt.getActualTypeArguments()[0];
+    }
+	
 	
 	@Inject
     private JdbcTemplate jdbcTemplate;
 	
 	@Override
-	public PK insert(T newInstance) {
-		 final String INSERT_SQL = "insert into brand (name) values(?)";
+	public PK insert(final T transientObject) {
+		
 		  KeyHolder keyHolder = new GeneratedKeyHolder();
 		  jdbcTemplate.update(new PreparedStatementCreator() {
 	            @Override
@@ -39,19 +52,21 @@ implements GenericDao<T, PK> {
 	                    Connection connection) throws SQLException {
 	                PreparedStatement ps = connection.prepareStatement(
 	                        getSqlInsert(), new String[] { "id" });
-	                ps.setString(1, brand.getName());
+	                setParamsForInsert(ps ,transientObject);
 	                return ps;
 	            }
+
+				
 	        }, keyHolder);
 
-		  brand.setId(keyHolder.getKey().longValue());
+		
 
-	        return brand.getId();
+	        return (PK) transientObject.getId();
 	}
 
 	@Override
-	public void delete(T persistentObject) {
-		// TODO Auto-generated method stub
+	public void delete(PK id) {
+		 this.jdbcTemplate.update("delete from "+getTable()+" where id = ?", id);
 		
 	}
 
@@ -59,19 +74,20 @@ implements GenericDao<T, PK> {
 	public T get(PK id) {
 		 return jdbcTemplate.queryForObject(
 	                "select * from "+this.getTable()+" where id = ?",
-	                new Object[] { id }, new BeanPropertyRowMapper<T>());
+	                new Object[] { id }, new BeanPropertyRowMapper<T>((Class<T>) daoType));
 	}
 
 	@Override
-	public T update(T transientObject) {
-		// TODO Auto-generated method stub
-		return null;
+	public void update(T transientObject) {
+		
+		 this.jdbcTemplate.update(getSqlUpdate(), transientObject.getId(), setParamsForUpdate(transientObject));
 	}
 
+	
 	@Override
 	public List<T> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.jdbcTemplate.query( getSqlSelectList(),new BeanPropertyRowMapper<T>((Class<T>) daoType));
 	}
+	
 
 }

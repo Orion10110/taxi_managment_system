@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.orion10110.taximanager.datamodel.Brand;
 import com.orion10110.training.managertaxi.daodb.BrandDao;
-import com.orion10110.training.managertaxi.servises.BrandSevices;
+import com.orion10110.training.managertaxi.services.BrandSevices;
+
 
 @Service
 public class BrandServicesImpl implements BrandSevices {
@@ -37,5 +38,11 @@ public class BrandServicesImpl implements BrandSevices {
 			brandDao.update(brand);
 			return brand.getId();
 		}
+	}
+
+	@Override
+	public Long delete(Long id) {
+		brandDao.delete(id);
+		return id;
 	}
 }

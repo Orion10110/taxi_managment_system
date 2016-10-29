@@ -1,4 +1,4 @@
-package com.orion10110.training.managertaxi.servises;
+package com.orion10110.training.managertaxi.services;
 
 import java.util.List;
 

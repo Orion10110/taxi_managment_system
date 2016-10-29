@@ -1,4 +1,4 @@
-package com.orion10110.training.managertaxi.servises;
+package com.orion10110.training.managertaxi.services;
 
 import javax.inject.Inject;
 
@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.orion10110.taximanager.datamodel.Brand;
+import com.orion10110.training.managertaxi.services.BrandSevices;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:service-context.xml")
