@@ -1,5 +1,8 @@
 package com.orion10110.training.managertaxi.daodb.impl;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -8,36 +11,38 @@ import com.orion10110.taximanager.datamodel.District;
 import com.orion10110.training.managertaxi.daodb.DistrictDao;
 
 @Repository
-public class DistrictDaoImpl implements DistrictDao {
+public class DistrictDaoImpl extends GenericDaoImpl<District,Long> implements DistrictDao {
 
 	@Override
-	public District get(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	protected void setParamsForInsert(PreparedStatement ps, District entity) throws SQLException {
+		ps.setString(1, entity.getName());
+		
 	}
 
 	@Override
-	public void insert(District entity) {
-		// TODO Auto-generated method stub
-
+	protected List<Object> setParamsForUpdate(District entity) {
+		ArrayList list =new ArrayList();
+		list.add(entity.getName());
+		return list;
 	}
 
 	@Override
-	public void update(District entity) {
-		// TODO Auto-generated method stub
-
+	protected String getSqlInsert() {
+		return  "insert into district (name) values(?)";
 	}
 
 	@Override
-	public void delete(Long id) {
-		// TODO Auto-generated method stub
-
+	protected String getSqlUpdate() {
+		
+		return "update district set name = ? where id = ?";
 	}
 
 	@Override
-	public List<District> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+	protected String getTable() {
+		return "district";
 	}
+
+	
+	
 
 }

@@ -5,32 +5,29 @@ import javax.inject.Inject;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.orion10110.taximanager.datamodel.Street;
 import com.orion10110.taximanager.datamodel.TypeCar;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:service-context.xml")
-public class TypeCarServicesTest {
+public class StreetServiceTest {
 	@Inject
-	private TypeCarServices typeCarServices;
-
-	
+	private StreetService streetServices;
 
 	@Test
-	public void saveTypeTest() {
-		TypeCar typeCar = new TypeCar();
-		typeCar.setType("test type");
-
-		Long id = typeCarServices.save(typeCar);
-
+	public void saveStreetTest() {
+		Street street = new Street();
+		street.setName("test name");
+		street.setIdDistrict(1l);
+		Long id = streetServices.save(street);
+		
 		Assert.assertNotNull(id);
 
-		TypeCar typeCarFromDb = typeCarServices.get(id);
+		Street streetFromDb = streetServices.get(id);
 
-		Assert.assertEquals(typeCarFromDb.getType(), typeCarFromDb.getType());
+		Assert.assertEquals(street.getName(), streetFromDb.getName());
 	}
 }

@@ -35,10 +35,6 @@ public class TypeCarDaoImpl extends GenericDaoImpl<TypeCar,Long> implements Type
 		return "type_car";
 	}
 
-	@Override
-	protected String getSqlSelectList() {
-		return "select * from type_car";
-	}
 
 	@Override
 	protected String getSqlInsert() {

@@ -1,5 +1,8 @@
 package com.orion10110.training.managertaxi.daodb.impl;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -8,36 +11,36 @@ import com.orion10110.taximanager.datamodel.Discount;
 import com.orion10110.training.managertaxi.daodb.DiscountDao;
 
 @Repository
-public class DiscountDaoImpl implements DiscountDao {
+public class DiscountDaoImpl extends GenericDaoImpl<Discount,Long> implements DiscountDao {
 
 	@Override
-	public Discount get(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	protected void setParamsForInsert(PreparedStatement ps, Discount entity) throws SQLException {
+		ps.setString(1, entity.getName());
+		ps.setInt(2,entity.getDiscountPercent());
+		
 	}
 
 	@Override
-	public void insert(Discount entity) {
-		// TODO Auto-generated method stub
-
+	protected List<Object> setParamsForUpdate(Discount entity) {
+		ArrayList<Object> list = new ArrayList<Object>();
+		list.add(entity.getName());
+		list.add(entity.getDiscountPercent());
+		return list;
 	}
 
 	@Override
-	public void update(Discount entity) {
-		// TODO Auto-generated method stub
-
+	protected String getSqlInsert() {
+		return "insert into discount (name,discount_percent) values(?,?)";
 	}
 
 	@Override
-	public void delete(Long id) {
-		// TODO Auto-generated method stub
-
+	protected String getSqlUpdate() {
+		return "update discount set name=?,discount_percent=? where id=?"; 
 	}
 
 	@Override
-	public List<Discount> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+	protected String getTable() {
+		return "discount";
 	}
 
 }

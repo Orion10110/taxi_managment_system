@@ -1,5 +1,8 @@
 package com.orion10110.training.managertaxi.daodb.impl;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -8,36 +11,36 @@ import com.orion10110.taximanager.datamodel.Status;
 import com.orion10110.training.managertaxi.daodb.StatusDao;
 
 @Repository
-public class StatusDaoImpl implements StatusDao {
+public class StatusDaoImpl extends GenericDaoImpl<Status,Long> implements StatusDao {
 
 	@Override
-	public Status get(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	protected void setParamsForInsert(PreparedStatement ps, Status entity) throws SQLException {
+		ps.setString(1, entity.getStatus());
+		
 	}
 
 	@Override
-	public void insert(Status entity) {
-		// TODO Auto-generated method stub
-
+	protected List<Object> setParamsForUpdate(Status entity) {
+		ArrayList<Object> list = new ArrayList<Object>();
+		list.add(entity.getStatus());
+		return list;
 	}
 
 	@Override
-	public void update(Status entity) {
-		// TODO Auto-generated method stub
-
+	protected String getSqlInsert() {
+		return "insert into status (status) values(?)";
 	}
 
 	@Override
-	public void delete(Long id) {
-		// TODO Auto-generated method stub
-
+	protected String getSqlUpdate() {
+			return "update status set status=? where id=?";
 	}
 
 	@Override
-	public List<Status> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+	protected String getTable() {
+		return "status";
 	}
+
+	
 
 }

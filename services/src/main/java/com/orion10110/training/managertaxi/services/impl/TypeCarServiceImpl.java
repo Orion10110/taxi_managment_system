@@ -7,19 +7,19 @@ import org.springframework.stereotype.Service;
 import com.orion10110.taximanager.datamodel.TypeCar;
 import com.orion10110.training.managertaxi.daodb.GenericDao;
 import com.orion10110.training.managertaxi.daodb.TypeCarDao;
-import com.orion10110.training.managertaxi.services.TypeCarServices;
+import com.orion10110.training.managertaxi.services.TypeCarService;
 
 @Service
-public class TypeCarServicesImpl extends GenericServiceImpl<TypeCar, Long> implements TypeCarServices {
+public class TypeCarServiceImpl extends GenericServiceImpl<TypeCar, Long> implements TypeCarService {
 
 	private TypeCarDao typeCarDao;
 	
-		public TypeCarServicesImpl(){
+		public TypeCarServiceImpl(){
 			
 		}
 
 	    @Autowired
-	    public TypeCarServicesImpl(
+	    public TypeCarServiceImpl(
 	            @Qualifier("typeCarDaoImpl") GenericDao<TypeCar, Long> genericDao) {
 	        super(genericDao);
 	        this.typeCarDao = (TypeCarDao) genericDao;
