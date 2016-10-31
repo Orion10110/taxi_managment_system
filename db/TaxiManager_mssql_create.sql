@@ -78,7 +78,7 @@ CREATE TABLE [car] (
 	place integer NOT NULL,
 	gos_number varchar(128) NOT NULL,
 	stars integer NOT NULL,
-	active binary NOT NULL,
+	active bit NOT NULL,
   
 
 )

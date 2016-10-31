@@ -21,7 +21,7 @@ public class TypeCarServiceTest {
 	
 
 	@Test
-	public void saveTypeTest() {
+	public void createTypeTest() {
 		TypeCar typeCar = new TypeCar();
 		typeCar.setType("test type");
 
@@ -33,4 +33,16 @@ public class TypeCarServiceTest {
 
 		Assert.assertEquals(typeCar.getType(), typeCarFromDb.getType());
 	}
+	
+	@Test
+	public void updateTypeTest() {
+		
+
+		TypeCar typeCar = typeCarServices.get(2l);
+		typeCar.setType("внедарожник");
+		Long id = typeCarServices.save(typeCar);
+		TypeCar typeCarFromDb = typeCarServices.get(2l);
+		Assert.assertEquals(typeCar.getType(), typeCarFromDb.getType());
+	}
+	
 }

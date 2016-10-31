@@ -14,36 +14,15 @@ import com.orion10110.training.managertaxi.daodb.ClientDao;
 public class ClientDaoImpl extends GenericDaoImpl<Client,Long> implements ClientDao {
 
 	@Override
-	protected void setParamsForInsert(PreparedStatement ps, Client entity) throws SQLException {
-		ps.setString(1,entity.getFirstName());
-		ps.setString(2, entity.getSecondName());
-		ps.setString(3, entity.getPatronymic());
-		ps.setString(4, entity.getPhoneNumber());
-		ps.setLong(5, entity.getIdDiscount());
-		
-	}
-
-	@Override
-	protected List<Object> setParamsForUpdate(Client entity) {
-		ArrayList<Object> list = new ArrayList<Object>();
-		list.add(entity.getFirstName());
-		list.add(entity.getSecondName());
-		list.add(entity.getPatronymic());
-		list.add(entity.getPhoneNumber());
-		list.add(entity.getIdDiscount());
-		return list;
-	}
-
-	@Override
 	protected String getSqlInsert() {
 		return "insert into client (first_name,second_name,patronymic,phone_number,id_discount)"
-				+" values(?,?,?,?,?)";
+				+" values(:firstName,:secondName,:patronymic,:phoneNumber,:idDiscount)";
 	}
 
 	@Override
 	protected String getSqlUpdate() {
-		return "update client set first_name=?,second_name=?,patronymic=?,phone_number=?,id_discount=?"
-				+"where id=?";
+		return "update client set first_name=:firstName,second_name=:secondName,patronymic=:patronymic,phoneNumber=:phoneNumber,"
+				+ "id_discount=:idDiscount where id=:id";
 	}
 
 	@Override

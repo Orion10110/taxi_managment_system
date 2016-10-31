@@ -14,9 +14,7 @@ public class st {
         for (String beanName : beanDefinitionNames) {
             System.out.println(beanName);
         }
-       CarService carS = springContext.getBean(CarServiceImpl.class);
-       Car car = carS.get(1l);
-       System.out.println(car);
+      
 	}
 
 }

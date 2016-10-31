@@ -16,19 +16,6 @@ import com.orion10110.training.managertaxi.daodb.TypeCarDao;
 @Repository
 public class TypeCarDaoImpl extends GenericDaoImpl<TypeCar,Long> implements TypeCarDao{
 
-	
-	@Override
-	protected void setParamsForInsert(PreparedStatement ps, TypeCar entity) throws SQLException {
-		ps.setString(1, entity.getType());
-		
-	}
-
-	@Override
-	protected List<Object> setParamsForUpdate(TypeCar entity) {
-		ArrayList<Object> params= new ArrayList<Object>();
-		params.add(entity.getType());
-		return params;
-	}
 
 	@Override
 	protected String getTable() {
@@ -38,13 +25,13 @@ public class TypeCarDaoImpl extends GenericDaoImpl<TypeCar,Long> implements Type
 
 	@Override
 	protected String getSqlInsert() {
-		return "insert into type_car (type) values(?)";
+		return "insert into type_car (type) values(:type)";
 	}
 
 	@Override
 	protected String getSqlUpdate() {
 	
-		return "update type_car set type = ? where id = ?";
+		return "update type_car set type = :type where id = :id";
 	}
 
 	

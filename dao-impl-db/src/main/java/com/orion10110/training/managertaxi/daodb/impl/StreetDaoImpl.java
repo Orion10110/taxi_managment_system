@@ -14,27 +14,13 @@ import com.orion10110.training.managertaxi.daodb.StreetDao;
 public class StreetDaoImpl extends GenericDaoImpl<Street,Long> implements StreetDao {
 
 	@Override
-	protected void setParamsForInsert(PreparedStatement ps, Street entity) throws SQLException {
-		ps.setString(1, entity.getName());
-		ps.setLong(2, entity.getIdDistrict());
-	}
-
-	@Override
-	protected List<Object> setParamsForUpdate(Street entity) {
-		ArrayList<Object> list= new ArrayList<Object>();
-		list.add(entity.getName());
-		list.add(entity.getIdDistrict());
-		return list;
-	}
-
-	@Override
 	protected String getSqlInsert() {
-		return "insert into street (name,id_district) values(?,?)";
+		return "insert into street (name,id_district) values(:name,:idDistrict)";
 	}
 
 	@Override
 	protected String getSqlUpdate() {
-		return "update street set name = ?, id_district = ? where id = ?";
+		return "update street set name = :name, id_district = :idDistrict where id = :id";
 	}
 
 	@Override

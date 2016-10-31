@@ -15,41 +15,16 @@ import com.orion10110.training.managertaxi.mapper.CarMapper;
 @Repository
 public class CarDaoImpl extends GenericDaoImpl<Car,Long> implements CarDao {
 
-	@Override
-	protected void setParamsForInsert(PreparedStatement ps, Car entity) throws SQLException {
-		ps.setString(1, entity.getName());
-		ps.setLong(2, entity.getIdBrand());
-		ps.setLong(3, entity.getIdType());
-		ps.setInt(4, entity.getPlace());
-		ps.setString(5, entity.getGosNumber());
-		ps.setLong(6, entity.getStars());
-		ps.setBoolean(7, entity.getActive());
-		
-		
-	}
-
-	@Override
-	protected List<Object> setParamsForUpdate(Car entity) {
-		ArrayList list =new ArrayList();
-		list.add( entity.getName());
-		list.add(  entity.getIdBrand());
-		list.add(  entity.getIdType());
-		list.add(  entity.getPlace());
-		list.add(  entity.getGosNumber());
-		list.add(  entity.getStars());
-		list.add(  entity.getActive());
-		return list;
-	}
 
 	@Override
 	protected String getSqlInsert() {
 		
-		return "insert into car (name,id_brand,id_type,place,gos_number,stars,active) values(?,?,?,?,?,?,?)";
+		return "insert into car (name,id_brand,id_type,place,gos_number,stars,active) values(:name,:idBrand,:idType,:place,:gosNumber,:stars,:active)";
 	}
 
 	@Override
 	protected String getSqlUpdate() {
-		return "update car set name,id_brand=?,id_type=?,place=?,gos_number=?,stars=?,active=? where id=?";
+		return "update car set name=:name,id_brand=:idBrand,id_type=:idType,place=:place,gosNumber=:gos_number,stars=:stars,active=:active where id=:id";
 	}
 
 	@Override
