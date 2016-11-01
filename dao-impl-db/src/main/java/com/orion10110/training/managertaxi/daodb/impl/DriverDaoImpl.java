@@ -1,43 +1,29 @@
 package com.orion10110.training.managertaxi.daodb.impl;
 
-import java.util.List;
-
 import org.springframework.stereotype.Repository;
 
 import com.orion10110.taximanager.datamodel.Driver;
 import com.orion10110.training.managertaxi.daodb.DriverDao;
 
 @Repository
-public class DriverDaoImpl implements DriverDao {
+public class DriverDaoImpl extends GenericDaoImpl<Driver, Long> implements DriverDao {
 
 	@Override
-	public Driver get(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	protected String getSqlInsert() {
+		return "insert into driver (first_name,second_name,patronymic,phone_number,date_of_birth,date_of_employment,category,id_district,id_car)"
+				+ " values(:firstName,:secondName,:patronymic,:phoneNumber,:dateOfBirth,:dateOfEmployment,:category,:idDistrict,:idCar)";
 	}
 
 	@Override
-	public void insert(Driver entity) {
-		// TODO Auto-generated method stub
-
+	protected String getSqlUpdate() {
+		return "update driver set first_name=:firstName,second_name=:secondName,patronymic=:patronymic,phoneNumber=:phoneNumber,"
+				+ "date_of_birth=:dateOfBirth,date_of_employment=:dateOfEmployment,category=:category,id_district=:idDistrict,"
+				+ "idCar=:idCar where id=:id";
 	}
 
 	@Override
-	public void update(Driver entity) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void delete(Long id) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public List<Driver> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+	protected String getTable() {
+		return "driver";
 	}
 
 }

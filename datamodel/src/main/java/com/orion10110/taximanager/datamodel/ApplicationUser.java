@@ -5,7 +5,7 @@ public class ApplicationUser extends AbstractModel {
 	private Boolean emailConfirmed;
 	private String passwordHash;
 	private String phoneNumber;
-	private Boolean phineNumberConfirmed;
+	private Boolean phoneNumberConfirmed;
 	private String userName;
 
 	public String getEmail() {
@@ -40,12 +40,12 @@ public class ApplicationUser extends AbstractModel {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public Boolean getPhineNumberConfirmed() {
-		return phineNumberConfirmed;
+	public Boolean getPhoneNumberConfirmed() {
+		return phoneNumberConfirmed;
 	}
 
-	public void setPhineNumberConfirmed(Boolean phineNumberConfirmed) {
-		this.phineNumberConfirmed = phineNumberConfirmed;
+	public void setPhoneNumberConfirmed(Boolean phoneNumberConfirmed) {
+		this.phoneNumberConfirmed = phoneNumberConfirmed;
 	}
 
 	public String getUserName() {

@@ -1,43 +1,31 @@
 package com.orion10110.training.managertaxi.daodb.impl;
 
-import java.util.List;
-
 import org.springframework.stereotype.Repository;
 
 import com.orion10110.taximanager.datamodel.ApplicationUser;
 import com.orion10110.training.managertaxi.daodb.ApplicationUserDao;
 
 @Repository
-public class ApplicationUserDaoImpl implements ApplicationUserDao {
+public class ApplicationUserDaoImpl extends GenericDaoImpl<ApplicationUser,Long> implements ApplicationUserDao {
 
 	@Override
-	public ApplicationUser get(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	protected String getSqlInsert() {
+		return "insert into application_user (email,email_confirmed,password_hash,phone_number,"
+				+ "phone_number_confirmed,user_name) values(:email,:emailConfirmed,:passwordHash,:phoneNumber,"
+				+ ":phoneNumberConfirmed,:userName)";
 	}
 
 	@Override
-	public void insert(ApplicationUser entity) {
-		// TODO Auto-generated method stub
-
+	protected String getSqlUpdate() {
+		return "update application_user set email=:email,email_confirmed=:emailConfirmed,password_hash=:passwordHash,"
+				+ "phoneNumber=:phoneNumber, phone_number_confirmed=:phoneNumberVonfirmed,user_name=:user_name where id=:id";
 	}
 
 	@Override
-	public void update(ApplicationUser entity) {
-		// TODO Auto-generated method stub
-
+	protected String getTable() {
+		return "application_user";
 	}
 
-	@Override
-	public void delete(Long id) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public List<ApplicationUser> getAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 }

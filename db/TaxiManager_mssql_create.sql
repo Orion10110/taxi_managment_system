@@ -51,7 +51,7 @@ CREATE TABLE [order] (
 	phone_number varchar(64) NOT NULL,
 	id_client integer NOT NULL,
 	id_status integer NOT NULL,
-	date_order varchar(64) NOT NULL,
+	date_order datetime NOT NULL,
 	start_value integer NOT NULL,
 	end_value integer NOT NULL,
 	id_application_user integer NOT NULL,
@@ -86,11 +86,11 @@ GO
 CREATE TABLE [application_user] (
 	id integer NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	email varchar(256) NOT NULL,
-	email_confirmed binary NOT NULL,
-	password_hash varchar NOT NULL,
-	phone_number varchar NOT NULL,
-	phone_number_confirmed binary NOT NULL,
-	user_name varchar NOT NULL,
+	email_confirmed bit NOT NULL,
+	password_hash varchar(max) NOT NULL,
+	phone_number varchar(64) NOT NULL,
+	phone_number_confirmed bit NOT NULL,
+	user_name varchar(256) NOT NULL,
   
 
 )
