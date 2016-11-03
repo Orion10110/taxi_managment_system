@@ -25,7 +25,7 @@ import com.orion10110.training.managertaxi.daodb.GenericDao;
 @Repository
 public abstract class GenericDaoImpl<T extends AbstractModel, PK extends Serializable> implements GenericDao<T, PK> {
 	@Inject
-	private JdbcTemplate jdbcTemplate;
+	protected JdbcTemplate jdbcTemplate;
 	
 	@Inject
 	@Qualifier("namedParameterJdbcTemplate")

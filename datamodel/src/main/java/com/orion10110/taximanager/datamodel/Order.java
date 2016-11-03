@@ -1,5 +1,6 @@
 package com.orion10110.taximanager.datamodel;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class Order extends AbstractModel {
@@ -7,7 +8,7 @@ public class Order extends AbstractModel {
 	private Long idDriver;
 	private Long idStatus;
 	private String phoneNumber;
-	private Date dateOrder;
+	private Timestamp dateOrder;
 	private Long idStreetFrom;
 	private Long idStreetTo;
 	private Integer startValue;
@@ -37,10 +38,10 @@ public class Order extends AbstractModel {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	public Date getDateOrder() {
+	public Timestamp getDateOrder() {
 		return dateOrder;
 	}
-	public void setDateOrder(Date dateOrder) {
+	public void setDateOrder(Timestamp dateOrder) {
 		this.dateOrder = dateOrder;
 	}
 	public Long getIdStreetFrom() {

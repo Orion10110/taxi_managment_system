@@ -25,5 +25,7 @@ public class DriverDaoImpl extends GenericDaoImpl<Driver, Long> implements Drive
 	protected String getTable() {
 		return "driver";
 	}
+	
+	
 
 }
