@@ -1,10 +1,8 @@
 package com.orion10110.training.managertaxi.services;
 
-import java.sql.Time;
+import java.Time;
 import java.sql.Timestamp;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.inject.Inject;
@@ -56,12 +54,15 @@ public class OrderServiceTest {
 //		Assert.assertEquals(order.getIdStreetTo(), orderFromDb.getIdStreetTo());
 //		Assert.assertEquals(order.getPhoneNumber(), orderFromDb.getPhoneNumber());
 	Order order = new Order();
-		
-	DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS"); 
-	Date dtime = dateFormat.parse("1133-11-11 11:11:11.0");
+	Time time = new Time();
+	Date dat =new Date();
+		System.out.println(dat.getYear());
+//	DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS"); 
+//	Date dtime = dateFormat.parse("1133-11-11 11:11:11.0");
 //		DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX");
 //		Date date = format.parse("2015-12-10T02:59:00.000Z");
-		Timestamp timestamp = new Timestamp(dtime.getTime());
+		Timestamp timestamp = new Timestamp(dat.getTime());
+		System.out.println(timestamp);
 		order.setDateOrder(timestamp);
 		order.setEndValue(200);
 		order.setStartValue(100);
@@ -74,7 +75,9 @@ public class OrderServiceTest {
 		order.setPhoneNumber("10-10-10");
 	   Long id =orderDao.InsertToMap(order);
 		System.out.println(id);
-		
+		Order ord = orderDao.get(id);
+		Date dt = ord.getDateOrder();
+		System.out.println(dt);
 		
 	}
 }
