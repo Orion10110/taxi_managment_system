@@ -18,7 +18,7 @@ public class ApplicationUserDaoImpl extends GenericDaoImpl<ApplicationUser,Long>
 	@Override
 	protected String getSqlUpdate() {
 		return "update application_user set email=:email,email_confirmed=:emailConfirmed,password_hash=:passwordHash,"
-				+ "phoneNumber=:phoneNumber, phone_number_confirmed=:phoneNumberVonfirmed,user_name=:user_name where id=:id";
+				+ "phone_number=:phoneNumber, phone_number_confirmed=:phoneNumberConfirmed,user_name=:userName where id=:id";
 	}
 
 	@Override

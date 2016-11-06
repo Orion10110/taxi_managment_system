@@ -7,16 +7,9 @@ import java.util.Random;
 
 import javax.inject.Inject;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.orion10110.taximanager.datamodel.Discount;
-import com.orion10110.taximanager.datamodel.District;
-import com.orion10110.taximanager.datamodel.Street;
 
 public class DiscountServiceTest extends CrudTest<Discount> {
 	@Inject

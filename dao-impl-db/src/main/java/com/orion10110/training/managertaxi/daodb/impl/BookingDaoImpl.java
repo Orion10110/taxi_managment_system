@@ -17,7 +17,7 @@ public class BookingDaoImpl extends GenericDaoImpl<Booking,Long> implements Book
 
 	@Override
 	protected String getSqlUpdate() {
-		return "update booking set phone_number=:phoneNumber,id_client=:idClient,id_status=:idStatus,date_order=:idStatus,"
+		return "update booking set phone_number=:phoneNumber,id_client=:idClient,id_status=:idStatus,date_order=:dateOrder,"
 				+ "start_value=:startValue,end_value=:endValue,id_application_user=:idApplicationUser,id_street_from=:idStreetFrom,"
 				+ "id_street_to=:idStreetTo,id_driver=:idDriver where id = :id";
 	}

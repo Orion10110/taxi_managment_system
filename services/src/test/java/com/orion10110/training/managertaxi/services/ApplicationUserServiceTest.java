@@ -1,37 +1,68 @@
 package com.orion10110.training.managertaxi.services;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import java.util.Random;
+
 import javax.inject.Inject;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.orion10110.taximanager.datamodel.ApplicationUser;
-import com.orion10110.taximanager.datamodel.Brand;
+import com.orion10110.taximanager.datamodel.Status;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:service-context.xml")
-public class ApplicationUserServiceTest {
+public class ApplicationUserServiceTest extends CrudTest<ApplicationUser> {
 	@Inject
 	private ApplicationUserService applicationUserServices;
 
-	@Test
-	public void saveBrandTest() {
-		ApplicationUser appUser = new ApplicationUser();
-		appUser.setEmail("you@test.com");
-		appUser.setEmailConfirmed(true); 
-		appUser.setPasswordHash("pswordhash");
-		appUser.setPhoneNumber("788-78-78");
-		appUser.setPhoneNumberConfirmed(false);
-		appUser.setUserName("test");
-		Long id = applicationUserServices.save(appUser);
+	@Override
+	public void delete(ApplicationUser testObject) {
+		applicationUserServices.delete(testObject.getId());
+	}
 
-		Assert.assertNotNull(id);
+	@Override
+	public ApplicationUser select(Long id) {
+		return applicationUserServices.get(id);
+	}
 
-		ApplicationUser appUserFromDb = applicationUserServices.get(id);
+	@Override
+	public void update(ApplicationUser testObject) {
+		applicationUserServices.save(testObject);
+	}
 
-		Assert.assertEquals(appUser.getUserName(), appUserFromDb.getUserName());
+	@Override
+	public void insert(ApplicationUser testObject) {
+		applicationUserServices.save(testObject);
+	}
+
+	@Override
+	public void changeTestObject(ApplicationUser testObject) {
+		Random random = new Random();
+		testObject.setEmail(random.nextInt() + "");
+		testObject.setEmailConfirmed(random.nextBoolean());
+		testObject.setPasswordHash(random.nextInt() + "");
+		testObject.setPhoneNumber(random.nextInt() + "");
+		testObject.setPhoneNumberConfirmed(random.nextBoolean());
+		testObject.setUserName(random.nextInt() + "");
+	}
+	
+	@Override
+	public void compare(ApplicationUser selected, ApplicationUser testObject) {
+		assertNotNull("selected is null", selected);
+		assertEquals(selected.getEmail(), testObject.getEmail());
+		assertEquals(selected.getEmailConfirmed(), testObject.getEmailConfirmed());
+		assertEquals(selected.getPasswordHash(), testObject.getPasswordHash());
+		assertEquals(selected.getPhoneNumber(), testObject.getPhoneNumber());
+		assertEquals(selected.getPhoneNumberConfirmed(), testObject.getPhoneNumberConfirmed());
+		assertEquals(selected.getUserName(), testObject.getUserName());
+
+	}
+
+	@Autowired
+	public void setApplicationUser(ApplicationUser appUser) {
+		setTestObject(appUser);
 	}
 }

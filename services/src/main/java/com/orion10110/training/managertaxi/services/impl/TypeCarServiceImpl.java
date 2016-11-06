@@ -11,22 +11,8 @@ import com.orion10110.training.managertaxi.services.TypeCarService;
 
 @Service
 public class TypeCarServiceImpl extends GenericServiceImpl<TypeCar, Long> implements TypeCarService {
-
-	private TypeCarDao typeCarDao;
-	
-		public TypeCarServiceImpl(){
-			
-		}
-
-	    @Autowired
-	    public TypeCarServiceImpl(
-	            @Qualifier("typeCarDaoImpl") GenericDao<TypeCar, Long> genericDao) {
-	        super(genericDao);
-	        this.typeCarDao = (TypeCarDao) genericDao;
-	    }
-
-	
-
-	
-
+	@Autowired
+	public void setTypeCarDao(TypeCarDao typeCarDao) {
+		setGenericDao(typeCarDao);
+	}
 }
