@@ -64,7 +64,7 @@ public abstract class GenericDaoImpl<T extends AbstractModel, PK extends Seriali
 				keyHolder, new String[] { "id" });
 
 		Long key = keyHolder.getKey().longValue();
-
+		transientObject.setId(key);
 		return (PK) key;
 	}
 

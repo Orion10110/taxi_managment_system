@@ -1,48 +1,58 @@
 package com.orion10110.training.managertaxi.services;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.Random;
+
 import javax.inject.Inject;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.orion10110.taximanager.datamodel.TypeCar;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:service-context.xml")
-public class TypeCarServiceTest {
+public class TypeCarServiceTest extends CrudTest<TypeCar> {
 	@Inject
 	private TypeCarService typeCarServices;
 
-	
+	@Override
+	public void delete(TypeCar testObject) {
+		typeCarServices.delete(testObject.getId());
+	}
 
-	@Test
-	public void createTypeTest() {
-		TypeCar typeCar = new TypeCar();
-		typeCar.setType("test type");
+	@Override
+	public TypeCar select(Long id) {
+		return typeCarServices.get(id);
+	}
 
-		Long id = typeCarServices.save(typeCar);
+	@Override
+	public void update(TypeCar testObject) {
+		typeCarServices.save(testObject);
 
-		Assert.assertNotNull(id);
+	}
 
-		TypeCar typeCarFromDb = typeCarServices.get(id);
+	@Override
+	public void insert(TypeCar testObject) {
+		typeCarServices.save(testObject);
+	}
 
-		Assert.assertEquals(typeCar.getType(), typeCarFromDb.getType());
+	@Override
+	public void changeTestObject(TypeCar testObject) {
+		Random random = new Random();
+		testObject.setType(random.nextLong() + "");
+
 	}
 	
-	@Test
-	public void updateTypeTest() {
-		
+	@Override
+	public void compare(TypeCar selected, TypeCar testObject) {
+        assertNotNull("selected is null", selected);
+        assertEquals(selected.getType(), testObject.getType());
+       
+    }
 
-		TypeCar typeCar = typeCarServices.get(2l);
-		typeCar.setType("внедарожник");
-		Long id = typeCarServices.save(typeCar);
-		TypeCar typeCarFromDb = typeCarServices.get(2l);
-		Assert.assertEquals(typeCar.getType(), typeCarFromDb.getType());
+	@Autowired
+	public void setTypeCar(TypeCar typeCar) {
+		setTestObject(typeCar);
 	}
-	
 }

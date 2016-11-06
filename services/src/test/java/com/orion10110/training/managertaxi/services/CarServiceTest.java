@@ -20,8 +20,8 @@ public class CarServiceTest {
 	public void saveClientTest() {
 		Car car = new Car();
 		car.setName("NameS");
-		car.setIdBrand(1l);
-		car.setIdType(1l);
+		car.setIdBrand(2l);
+		car.setIdType(8l);
 		car.setPlace(5);
 		car.setStars(6);
 		car.setActive(true);

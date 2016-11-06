@@ -1,14 +1,9 @@
 package com.orion10110.training.managertaxi.services.impl;
 
 
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import javax.inject.Inject;
 
-import com.orion10110.taximanager.datamodel.Order;
+import com.orion10110.taximanager.datamodel.TypeCar;
 import com.orion10110.training.managertaxi.daodb.OrderDao;
 
 public class st {
@@ -23,9 +18,12 @@ public class st {
 //            System.out.println(beanName);
 //        }
 //      
+	TypeCar typecar = new TypeCar();
+	TypeCar typecarT = new TypeCar();
+	typecar.setType("AS");
+	System.out.println(typecar);
 	
-	
-		
+	System.out.println(typecarT);
 	}
 
 	

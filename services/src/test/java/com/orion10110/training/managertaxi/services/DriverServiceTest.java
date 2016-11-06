@@ -26,7 +26,7 @@ public class DriverServiceTest {
 		driver.setFirstName("NameF");
 		driver.setPatronymic("patronymic");
 		driver.setPhoneNumber("90-90-90");
-		driver.setIdCar(2l);
+		driver.setIdCar(10l);
 		driver.setIdDistrict(1l);
 		driver.setDateOfBirth(new Date("10/10/2009"));
 		driver.setDateOfEmployment(new Date("10/10/2009"));
