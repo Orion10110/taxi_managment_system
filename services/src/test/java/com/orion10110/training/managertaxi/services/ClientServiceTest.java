@@ -1,39 +1,61 @@
 package com.orion10110.training.managertaxi.services;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import java.util.Random;
+
 import javax.inject.Inject;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.orion10110.taximanager.datamodel.Client;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:service-context.xml")
-public class ClientServiceTest {
+public class ClientServiceTest extends CrudTest<Client>{
 	@Inject
 	private ClientService clientServices;
 
-	@Test
-	public void saveClientTest() {
-		Client client = new Client();
-		client.setSecondName("NameS");
-		client.setFirstName("NameF");
-		client.setPatronymic("patronymic");
-		client.setPhoneNumber("90-90-90");
-		client.setIdDiscount(1l);
-		Long id = clientServices.save(client);
+	@Override
+	public void delete(Client testObject) {
+		clientServices.delete(testObject.getId());
+	}
 
-		Assert.assertNotNull(id);
+	@Override
+	public Client select(Long id) {
+		return clientServices.get(id);
+	}
 
-		Client clientFromDb = clientServices.get(id);
+	@Override
+	public void update(Client testObject) {
+		clientServices.save(testObject);		
+	}
 
-		Assert.assertEquals(client.getSecondName(), clientFromDb.getSecondName());
-		Assert.assertEquals(client.getFirstName(), clientFromDb.getFirstName());
-		Assert.assertEquals(client.getPatronymic(), clientFromDb.getPatronymic());
-		Assert.assertEquals(client.getPhoneNumber(), clientFromDb.getPhoneNumber());
-		Assert.assertEquals(client.getIdDiscount(), clientFromDb.getIdDiscount());
+	@Override
+	public void insert(Client testObject) {
+		clientServices.save(testObject);		
+	}
+
+	@Override
+	public void changeTestObject(Client testObject) {
+		Random random = new Random();
+		testObject.setSecondName(random.nextInt() +"");
+		testObject.setFirstName("TestFName");
+		testObject.setPatronymic("TestPatr");
+		testObject.setPhoneNumber("11-11-11");
+	}
+	
+	@Override
+	public void compare(Client selected, Client testObject) {
+		assertNotNull("selected is null", selected);
+		assertEquals(selected.getSecondName(), testObject.getSecondName());
+		assertEquals(selected.getFirstName(), testObject.getFirstName());
+		assertEquals(selected.getPatronymic(), testObject.getPatronymic());
+		assertEquals(selected.getPhoneNumber(), testObject.getPhoneNumber());
+		assertEquals(selected.getIdDiscount(), testObject.getIdDiscount());
+	}
+
+	@Autowired
+	public void setClient(Client client) {
+		setTestObject(client);
 	}
 }

@@ -1,43 +1,66 @@
 package com.orion10110.training.managertaxi.services;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import java.util.Random;
+
 import javax.inject.Inject;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.orion10110.taximanager.datamodel.Car;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:service-context.xml")
-public class CarServiceTest {
+public class CarServiceTest extends CrudTest<Car> {
 	@Inject
 	private CarService carServices;
 
-	@Test
-	public void saveClientTest() {
-		Car car = new Car();
-		car.setName("NameS");
-		car.setIdBrand(2l);
-		car.setIdType(8l);
-		car.setPlace(5);
-		car.setStars(6);
-		car.setActive(true);
-		car.setGosNumber("LO10101");
-		Long id = carServices.save(car);
-
-		Assert.assertNotNull(id);
-
-		Car carFromDb = carServices.get(id);
-
-		Assert.assertEquals(car.getName(), carFromDb.getName());
-		Assert.assertEquals(car.getIdBrand(), carFromDb.getIdBrand());
-		Assert.assertEquals(car.getIdType(), carFromDb.getIdType());
-		Assert.assertEquals(car.getPlace(), carFromDb.getPlace());
-		Assert.assertEquals(car.getStars(), carFromDb.getStars());
-		Assert.assertEquals(car.getActive(), carFromDb.getActive());
-		Assert.assertEquals(car.getGosNumber(), carFromDb.getGosNumber());
+	@Override
+	public void delete(Car testObject) {
+		carServices.delete(testObject.getId());
 	}
+
+	@Override
+	public Car select(Long id) {
+		return carServices.get(id);
+	}
+
+	@Override
+	public void update(Car testObject) {
+		carServices.save(testObject);
+	}
+
+	@Override
+	public void insert(Car testObject) {
+		carServices.save(testObject);
+	}
+
+	@Override
+	public void changeTestObject(Car testObject) {
+		Random random = new Random();
+		testObject.setName(random.nextInt(500) + "");
+		testObject.setPlace(random.nextInt(500));
+		testObject.setStars(random.nextInt(500));
+		testObject.setActive(random.nextBoolean());
+		testObject.setGosNumber(random.nextInt(500) + "");
+
+	}
+
+	@Override
+	public void compare(Car selected, Car testObject) {
+		assertNotNull("selected is null", selected);
+		assertEquals(selected.getName(), testObject.getName());
+		assertEquals(selected.getIdBrand(), testObject.getIdBrand());
+		assertEquals(selected.getIdType(), testObject.getIdType());
+		assertEquals(selected.getPlace(), testObject.getPlace());
+		assertEquals(selected.getStars(), testObject.getStars());
+		assertEquals(selected.getActive(), testObject.getActive());
+		assertEquals(selected.getGosNumber(), testObject.getGosNumber());
+	}
+
+	@Autowired
+	public void setCar(Car car) {
+		setTestObject(car);
+	}
+
 }

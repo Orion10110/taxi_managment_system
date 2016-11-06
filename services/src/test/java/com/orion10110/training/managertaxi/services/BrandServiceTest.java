@@ -15,19 +15,6 @@ public class BrandServiceTest extends CrudTest<Brand> {
 	@Inject
 	private BrandService brandService;
 
-//	@Test
-//	public void saveBrandTest() {
-//		Brand brand = new Brand();
-//		brand.setName("test name");
-//		Long id = brandServices.save(brand);
-//
-//		Assert.assertNotNull(id);
-//
-//		Brand brandFromDb = brandServices.get(id);
-//
-//		Assert.assertEquals(brand.getName(), brandFromDb.getName());
-//	}
-
 	@Override
 	public void delete(Brand testObject) {
 		brandService.delete(testObject.getId());

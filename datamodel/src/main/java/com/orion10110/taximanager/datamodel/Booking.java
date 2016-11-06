@@ -3,7 +3,7 @@ package com.orion10110.taximanager.datamodel;
 import java.sql.Timestamp;
 import java.util.Date;
 
-public class Order extends AbstractModel {
+public class Booking extends AbstractModel {
 	private Long idClient;
 	private Long idDriver;
 	private Long idStatus;

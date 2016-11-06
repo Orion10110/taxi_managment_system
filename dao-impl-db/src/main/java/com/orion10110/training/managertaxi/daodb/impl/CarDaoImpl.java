@@ -24,7 +24,7 @@ public class CarDaoImpl extends GenericDaoImpl<Car,Long> implements CarDao {
 
 	@Override
 	protected String getSqlUpdate() {
-		return "update car set name=:name,id_brand=:idBrand,id_type=:idType,place=:place,gosNumber=:gos_number,stars=:stars,active=:active where id=:id";
+		return "update car set name=:name,id_brand=:idBrand,id_type=:idType,place=:place,gos_number=:gosNumber,stars=:stars,active=:active where id=:id";
 	}
 
 	@Override

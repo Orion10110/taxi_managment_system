@@ -16,9 +16,9 @@ public class DriverDaoImpl extends GenericDaoImpl<Driver, Long> implements Drive
 
 	@Override
 	protected String getSqlUpdate() {
-		return "update driver set first_name=:firstName,second_name=:secondName,patronymic=:patronymic,phoneNumber=:phoneNumber,"
+		return "update driver set first_name=:firstName,second_name=:secondName,patronymic=:patronymic,phone_number=:phoneNumber,"
 				+ "date_of_birth=:dateOfBirth,date_of_employment=:dateOfEmployment,category=:category,id_district=:idDistrict,"
-				+ "idCar=:idCar where id=:id";
+				+ "id_car=:idCar where id=:id";
 	}
 
 	@Override

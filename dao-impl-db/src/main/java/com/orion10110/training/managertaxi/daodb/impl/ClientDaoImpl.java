@@ -21,7 +21,7 @@ public class ClientDaoImpl extends GenericDaoImpl<Client,Long> implements Client
 
 	@Override
 	protected String getSqlUpdate() {
-		return "update client set first_name=:firstName,second_name=:secondName,patronymic=:patronymic,phoneNumber=:phoneNumber,"
+		return "update client set first_name=:firstName,second_name=:secondName,patronymic=:patronymic,phone_number=:phoneNumber,"
 				+ "id_discount=:idDiscount where id=:id";
 	}
 

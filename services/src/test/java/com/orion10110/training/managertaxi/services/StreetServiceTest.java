@@ -17,9 +17,6 @@ public class StreetServiceTest extends CrudTest<Street> {
 	@Inject
 	private StreetService streetService;
 
-	@Inject
-	private DistrictService districtService;
-
 	@Override
 	public void delete(Street testObject) {
 		streetService.delete(testObject.getId());
@@ -55,9 +52,7 @@ public class StreetServiceTest extends CrudTest<Street> {
 	}
 
 	@Autowired
-	public void setStret(District district, Street street) {
-		Long districtId = districtService.save(district);
-		street.setIdDistrict(districtId);
+	public void setStreet(Street street) {
 		setTestObject(street);
 	}
 

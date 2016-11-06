@@ -30,8 +30,8 @@ CREATE TABLE [driver] (
 	second_name varchar(128) NOT NULL,
 	 patronymic varchar(128) NOT NULL,
 	phone_number varchar(128) NOT NULL,
-	date_of_birth date NOT NULL,
-	date_of_employment date NOT NULL,
+	date_of_birth datetime NOT NULL,
+	date_of_employment datetime NOT NULL,
 	category integer NOT NULL,
 	id_district integer NOT NULL,
 	id_car integer NOT NULL,
@@ -46,7 +46,7 @@ CREATE TABLE [status] (
 
 )
 GO
-CREATE TABLE [order] (
+CREATE TABLE [booking] (
 	id integer NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	phone_number varchar(64) NOT NULL,
 	id_client integer NOT NULL,
@@ -133,35 +133,35 @@ ALTER TABLE [driver] CHECK CONSTRAINT [driver_fk1]
 GO
 
 
-ALTER TABLE [order] WITH CHECK ADD CONSTRAINT [order_fk0] FOREIGN KEY ([id_client]) REFERENCES [client]([id])
+ALTER TABLE [booking] WITH CHECK ADD CONSTRAINT [booking_fk0] FOREIGN KEY ([id_client]) REFERENCES [client]([id])
 ON UPDATE CASCADE
 GO
-ALTER TABLE [order] CHECK CONSTRAINT [order_fk0]
+ALTER TABLE [booking] CHECK CONSTRAINT [booking_fk0]
 GO
-ALTER TABLE [order] WITH CHECK ADD CONSTRAINT [order_fk1] FOREIGN KEY ([id_status]) REFERENCES [status]([id])
+ALTER TABLE [booking] WITH CHECK ADD CONSTRAINT [booking_fk1] FOREIGN KEY ([id_status]) REFERENCES [status]([id])
 ON UPDATE CASCADE
 GO
-ALTER TABLE [order] CHECK CONSTRAINT [order_fk1]
+ALTER TABLE [booking] CHECK CONSTRAINT [booking_fk1]
 GO
-ALTER TABLE [order] WITH CHECK ADD CONSTRAINT [order_fk2] FOREIGN KEY ([id_application_user]) REFERENCES [application_user]([id])
+ALTER TABLE [booking] WITH CHECK ADD CONSTRAINT [booking_fk2] FOREIGN KEY ([id_application_user]) REFERENCES [application_user]([id])
 ON UPDATE CASCADE
 GO
-ALTER TABLE [order] CHECK CONSTRAINT [order_fk2]
+ALTER TABLE [booking] CHECK CONSTRAINT [booking_fk2]
 GO
-ALTER TABLE [order] WITH CHECK ADD CONSTRAINT [order_fk3] FOREIGN KEY ([id_street_from]) REFERENCES [street]([id])
+ALTER TABLE [booking] WITH CHECK ADD CONSTRAINT [booking_fk3] FOREIGN KEY ([id_street_from]) REFERENCES [street]([id])
 ON UPDATE CASCADE
 GO
-ALTER TABLE [order] CHECK CONSTRAINT [order_fk3]
+ALTER TABLE [booking] CHECK CONSTRAINT [booking_fk3]
 GO
-ALTER TABLE [order] WITH CHECK ADD CONSTRAINT [order_fk4] FOREIGN KEY ([id_street_to]) REFERENCES [street]([id])
+ALTER TABLE [booking] WITH CHECK ADD CONSTRAINT [booking_fk4] FOREIGN KEY ([id_street_to]) REFERENCES [street]([id])
 ON UPDATE CASCADE
 GO
-ALTER TABLE [order] CHECK CONSTRAINT [order_fk4]
+ALTER TABLE [booking] CHECK CONSTRAINT [booking_fk4]
 GO
-ALTER TABLE [order] WITH CHECK ADD CONSTRAINT [order_fk5] FOREIGN KEY ([id_driver]) REFERENCES [driver]([id])
+ALTER TABLE [booking] WITH CHECK ADD CONSTRAINT [booking_fk5] FOREIGN KEY ([id_driver]) REFERENCES [driver]([id])
 ON UPDATE CASCADE
 GO
-ALTER TABLE [order] CHECK CONSTRAINT [order_fk5]
+ALTER TABLE [booking] CHECK CONSTRAINT [booking_fk5]
 GO
 
 
