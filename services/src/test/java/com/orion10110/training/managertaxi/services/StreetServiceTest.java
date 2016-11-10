@@ -3,14 +3,13 @@ package com.orion10110.training.managertaxi.services;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.List;
 import java.util.Random;
 
 import javax.inject.Inject;
 
-import org.junit.BeforeClass;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.orion10110.taximanager.datamodel.District;
 import com.orion10110.taximanager.datamodel.Street;
 
 public class StreetServiceTest extends CrudTest<Street> {
@@ -56,5 +55,9 @@ public class StreetServiceTest extends CrudTest<Street> {
 		setTestObject(street);
 	}
 
+	@Override
+	protected void saveAll(List<Street> testObject) {
+		streetService.saveAll(testObject);
+	}
 
 }

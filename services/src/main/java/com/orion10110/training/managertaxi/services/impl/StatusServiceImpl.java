@@ -9,7 +9,7 @@ import com.orion10110.training.managertaxi.services.StatusService;
 @Service
 public class StatusServiceImpl extends GenericServiceImpl<Status, Long> implements StatusService{
     @Autowired
-    public void setDao(StatusDao statusDao){
+    private void setDao(StatusDao statusDao){
     	setGenericDao(statusDao);
     }
 }

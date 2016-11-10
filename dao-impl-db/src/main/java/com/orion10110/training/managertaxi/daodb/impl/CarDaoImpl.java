@@ -13,18 +13,21 @@ import com.orion10110.training.managertaxi.daodb.CarDao;
 import com.orion10110.training.managertaxi.mapper.CarMapper;
 
 @Repository
-public class CarDaoImpl extends GenericDaoImpl<Car,Long> implements CarDao {
-
+public class CarDaoImpl extends GenericDaoImpl<Car, Long> implements CarDao {
 
 	@Override
 	protected String getSqlInsert() {
-		
-		return "insert into car (name,id_brand,id_type,place,gos_number,stars,active) values(:name,:idBrand,:idType,:place,:gosNumber,:stars,:active)";
+		String insert = String.format("insert into car (%s) values(%s)",
+				"name,id_brand,id_type,place,gos_number,stars,active",
+				":name,:idBrand,:idType,:place,:gosNumber,:stars,:active");
+		return insert;
 	}
 
 	@Override
 	protected String getSqlUpdate() {
-		return "update car set name=:name,id_brand=:idBrand,id_type=:idType,place=:place,gos_number=:gosNumber,stars=:stars,active=:active where id=:id";
+		String update = String.format("update car set %s",
+				"name=:name,id_brand=:idBrand,id_type=:idType,place=:place,gos_number=:gosNumber,stars=:stars,active=:active where id=:id");
+		return update;
 	}
 
 	@Override
@@ -32,10 +35,9 @@ public class CarDaoImpl extends GenericDaoImpl<Car,Long> implements CarDao {
 		return "car";
 	}
 
-	@Override
-	protected RowMapper<Car> getRowMapper(){
-		return new CarMapper();
-	}
-	
+//	@Override
+//	protected RowMapper<Car> getRowMapper() {
+//		return new CarMapper();
+//	}
 
 }

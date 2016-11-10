@@ -10,7 +10,7 @@ import com.orion10110.training.managertaxi.services.BrandService;
 @Service
 public class BrandServiceImpl extends GenericServiceImpl<Brand, Long> implements BrandService {
 	@Autowired
-	public void setDao(BrandDao brandDao) {
+	private void setDao(BrandDao brandDao) {
 		setGenericDao(brandDao);
 	}
 }

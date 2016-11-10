@@ -3,6 +3,7 @@ package com.orion10110.training.managertaxi.services;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.List;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -61,6 +62,11 @@ public class CarServiceTest extends CrudTest<Car> {
 	@Autowired
 	public void setCar(Car car) {
 		setTestObject(car);
+	}
+
+	@Override
+	protected void saveAll(List<Car> testObject) {
+		carServices.saveAll(testObject);
 	}
 
 }

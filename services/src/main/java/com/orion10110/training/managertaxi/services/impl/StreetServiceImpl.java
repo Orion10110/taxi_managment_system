@@ -10,7 +10,7 @@ import com.orion10110.training.managertaxi.services.StreetService;
 @Service
 public class StreetServiceImpl extends GenericServiceImpl<Street, Long> implements StreetService {
     @Autowired
-    public void setDao(StreetDao streetDao){
+    private void setDao(StreetDao streetDao){
     	setGenericDao(streetDao);
     }
 }

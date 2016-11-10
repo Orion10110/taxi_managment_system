@@ -1,8 +1,17 @@
 package com.orion10110.training.managertaxi.services;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +24,17 @@ public abstract class CrudTest<T extends AbstractModel> extends AbstractTest {
 
 	protected T testObject;
 
+	private Class<? extends T> testClass;
+
+	@Autowired
+	ApplicationContext context;
+
+	public CrudTest() {
+		Type t = getClass().getGenericSuperclass();
+		ParameterizedType pt = (ParameterizedType) t;
+		testClass = (Class) pt.getActualTypeArguments()[0];
+	}
+
 	/**
 	 * Tests the CRUD(create, read, update, delete) operations.First, it inserts
 	 * the test object into database. Second, it retrieves the saved data and
@@ -25,6 +45,9 @@ public abstract class CrudTest<T extends AbstractModel> extends AbstractTest {
 	 */
 	@Test
 	public void testCRUD() {
+		List<T> listTest = createList();
+		saveAll(listTest);
+		compareList(listTest);
 		insert(testObject);
 		T selected = select(testObject.getId());
 		compare(selected, testObject);
@@ -45,13 +68,29 @@ public abstract class CrudTest<T extends AbstractModel> extends AbstractTest {
 
 	}
 
+	private List<T> createList() {
+		ArrayList<T> listTestObject = new ArrayList<T>();
+		for (int i = 0; i < 10; i++) {
+			listTestObject.add(context.getBean(testClass));
+		}
+		return listTestObject;
+	}
+
+	private void compareList(List<T> listObject) {
+		T selected;
+		for (T t : listObject) {
+			selected = select(t.getId());
+			compare(t, selected);
+		}
+	}
+
 	/**
 	 * Deletes specified object from database.
 	 *
 	 * @param testObject
 	 *            object to delete from database
 	 */
-	public abstract void delete(T testObject);
+	protected abstract void delete(T testObject);
 
 	/**
 	 * Retrieves specified object from database. Makes the copy of specified
@@ -61,7 +100,7 @@ public abstract class CrudTest<T extends AbstractModel> extends AbstractTest {
 	 *            of the object to retrieve from db
 	 * @return copy of the specified object, that is retrieved from database
 	 */
-	public abstract T select(Long id);
+	protected abstract T select(Long id);
 
 	/**
 	 * Updates specified object within the database.
@@ -69,7 +108,7 @@ public abstract class CrudTest<T extends AbstractModel> extends AbstractTest {
 	 * @param testObject
 	 *            object to update
 	 */
-	public abstract void update(T testObject);
+	protected abstract void update(T testObject);
 
 	/**
 	 * Inserts specified object within the database.
@@ -77,7 +116,7 @@ public abstract class CrudTest<T extends AbstractModel> extends AbstractTest {
 	 * @param testObject
 	 *            object to insert into database
 	 */
-	public abstract void insert(T testObject);
+	protected abstract void insert(T testObject);
 
 	/**
 	 * You should implement this method for your tests and change the your test
@@ -86,7 +125,9 @@ public abstract class CrudTest<T extends AbstractModel> extends AbstractTest {
 	 * @param testObject
 	 *            object to change
 	 */
-	public abstract void changeTestObject(T testObject);
+	protected abstract void changeTestObject(T testObject);
+
+	protected abstract void saveAll(List<T> testObject);
 
 	/**
 	 * Compares two methods for the equality.
@@ -96,7 +137,7 @@ public abstract class CrudTest<T extends AbstractModel> extends AbstractTest {
 	 * @param testObject
 	 *            the object that is tested
 	 */
-	public void compare(T selected, T testObject) {
+	protected void compare(T selected, T testObject) {
 		assertNotNull("selected is null", selected);
 		assertTrue(selected.equals(testObject));
 	}
@@ -108,7 +149,7 @@ public abstract class CrudTest<T extends AbstractModel> extends AbstractTest {
 	 * @return the object that is tested, which is specified in the constructor
 	 *         of the class
 	 */
-	public T getTestObject() {
+	protected T getTestObject() {
 		return testObject;
 	}
 
@@ -118,7 +159,7 @@ public abstract class CrudTest<T extends AbstractModel> extends AbstractTest {
 	 * @param testObject
 	 *            the object to test
 	 */
-	public void setTestObject(T testObject) {
+	protected void setTestObject(T testObject) {
 		this.testObject = testObject;
 	}
 }

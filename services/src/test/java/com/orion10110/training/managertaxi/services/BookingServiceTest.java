@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -41,7 +42,7 @@ public class BookingServiceTest extends CrudTest<Booking> {
 
 	@Override
 	public void changeTestObject(Booking testObject) {
-		LocalDateTime loc = LocalDateTime.of(2015,03,13,18,30,30);
+		LocalDateTime loc = LocalDateTime.of(2015, 03, 13, 18, 30, 30);
 		Timestamp timestamp = Timestamp.valueOf(loc);
 		testObject.setDateOrder(timestamp);
 		testObject.setEndValue(111);
@@ -69,5 +70,10 @@ public class BookingServiceTest extends CrudTest<Booking> {
 	@Autowired
 	public void setOrder(Booking order) {
 		setTestObject(order);
+	}
+
+	@Override
+	protected void saveAll(List<Booking> testObject) {
+		bookingService.saveAll(testObject);
 	}
 }

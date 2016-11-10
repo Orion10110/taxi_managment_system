@@ -10,7 +10,7 @@ import com.orion10110.training.managertaxi.services.ClientService;
 @Service
 public class ClientServiceImpl extends GenericServiceImpl<Client, Long> implements ClientService {
 	@Autowired
-	public void setDao(ClientDao сlientDao) {
+	private void setDao(ClientDao сlientDao) {
 		setGenericDao(сlientDao);
 	}
 }

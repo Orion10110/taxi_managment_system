@@ -3,6 +3,7 @@ package com.orion10110.training.managertaxi.services;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.List;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -11,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.orion10110.taximanager.datamodel.Client;
 
-public class ClientServiceTest extends CrudTest<Client>{
+public class ClientServiceTest extends CrudTest<Client> {
 	@Inject
 	private ClientService clientServices;
 
@@ -27,23 +28,23 @@ public class ClientServiceTest extends CrudTest<Client>{
 
 	@Override
 	public void update(Client testObject) {
-		clientServices.save(testObject);		
+		clientServices.save(testObject);
 	}
 
 	@Override
 	public void insert(Client testObject) {
-		clientServices.save(testObject);		
+		clientServices.save(testObject);
 	}
 
 	@Override
 	public void changeTestObject(Client testObject) {
 		Random random = new Random();
-		testObject.setSecondName(random.nextInt() +"");
+		testObject.setSecondName(random.nextInt() + "");
 		testObject.setFirstName("TestFName");
 		testObject.setPatronymic("TestPatr");
 		testObject.setPhoneNumber("11-11-11");
 	}
-	
+
 	@Override
 	public void compare(Client selected, Client testObject) {
 		assertNotNull("selected is null", selected);
@@ -57,5 +58,10 @@ public class ClientServiceTest extends CrudTest<Client>{
 	@Autowired
 	public void setClient(Client client) {
 		setTestObject(client);
+	}
+
+	@Override
+	protected void saveAll(List<Client> testObject) {
+		clientServices.saveAll(testObject);
 	}
 }

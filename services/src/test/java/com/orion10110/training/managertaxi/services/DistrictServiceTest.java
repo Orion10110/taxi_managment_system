@@ -3,19 +3,14 @@ package com.orion10110.training.managertaxi.services;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.List;
 import java.util.Random;
 
 import javax.inject.Inject;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.orion10110.taximanager.datamodel.District;
-import com.orion10110.taximanager.datamodel.Street;
 
 public class DistrictServiceTest extends CrudTest<District> {
 	@Inject
@@ -33,20 +28,20 @@ public class DistrictServiceTest extends CrudTest<District> {
 
 	@Override
 	public void update(District testObject) {
-		districtServices.save(testObject);		
+		districtServices.save(testObject);
 	}
 
 	@Override
 	public void insert(District testObject) {
-		districtServices.save(testObject);		
+		districtServices.save(testObject);
 	}
 
 	@Override
 	public void changeTestObject(District testObject) {
 		Random random = new Random();
-		testObject.setName(random.nextInt()+"");
+		testObject.setName(random.nextInt() + "");
 	}
-	
+
 	@Override
 	public void compare(District selected, District testObject) {
 		assertNotNull("selected is null", selected);
@@ -57,6 +52,10 @@ public class DistrictServiceTest extends CrudTest<District> {
 	public void setDistrict(District district) {
 		setTestObject(district);
 	}
-	
-	
+
+	@Override
+	protected void saveAll(List<District> testObject) {
+		districtServices.saveAll(testObject);
+	}
+
 }

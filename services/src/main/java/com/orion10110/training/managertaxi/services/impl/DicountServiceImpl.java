@@ -9,7 +9,7 @@ import com.orion10110.training.managertaxi.services.DiscountService;
 @Service
 public class DicountServiceImpl extends GenericServiceImpl<Discount,Long> implements DiscountService{
     @Autowired
-    public void setDao(DiscountDao discountDao){
+    private void setDao(DiscountDao discountDao){
     	setGenericDao(discountDao);
     }
 }

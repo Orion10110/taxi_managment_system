@@ -11,7 +11,7 @@ import com.orion10110.training.managertaxi.services.ApplicationUserService;
 public class ApplicationUserServiceImpl extends GenericServiceImpl<ApplicationUser, Long>
 		implements ApplicationUserService {
 	@Autowired
-	public void setDao(ApplicationUserDao applicationUserDao) {
+	private void setDao(ApplicationUserDao applicationUserDao) {
 		setGenericDao(applicationUserDao);
 	}
 }

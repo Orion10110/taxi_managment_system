@@ -9,7 +9,7 @@ import com.orion10110.training.managertaxi.services.BookingService;
 @Service
 public class BookingServiceImpl extends GenericServiceImpl<Booking,Long> implements BookingService{
     @Autowired
-    public void setDao(BookingDao bookingDao){
+    private void setDao(BookingDao bookingDao){
     	setGenericDao(bookingDao);
     }
 

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+		</Console>
+
+		<RollingFile name="RollingFile" fileName="logs/app.log"
+			filePattern="logs/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="250 MB" />
+			</Policies>
+		</RollingFile>
+		<SMTPAppender name="SMTPAppender" class="org.apache.log4j.net.SMTPAppender">
+			<param name="BufferSize" value="512" />
+			<param name="SMTPHost" value="smtp.gmail.com" />
+			<param name="SMTPUsername" value="pojasoriona@gmail.com" />
+			<param name="SMTPPassword" value="Misterion10110" />
+			<param name="From" value="pojasoriona@gmail.com" />
+			<param name="To" value="artut.kalach@gmail.com" />
+			<param name="Subject" value="Application Taxi-Manager" />
+			<layout class="org.apache.log4j.PatternLayout">
+				<param name="ConversionPattern" value="[%d{ISO8601}]%n%n%-5p%n%n%c%n%n%m%n%n" />
+			</layout>
+			<filter class="org.apache.log4j.varia.LevelRangeFilter">
+				<param name="LevelMin" value="error" />
+				<param name="LevelMax" value="fatal" />
+			</filter>
+		</SMTPAppender>
+		<JDBCAppender name="JDBCAppender" class="org.apache.log4j.jdbc.JDBCAppender">
+			<param name="url" value="jdbc:sqlserver://127.0.0.1:1433;databaseName=taxi_db" />
+			<param name="driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+			<param name="user" value="admin" />
+			<param name="password" value="root" />
+			<param name="sql" value="INSERT INTO LOGS VALUES (now() ,'%C','%p','%m')" />
+			<layout class="org.apache.log4j.PatternLayout"></layout>
+		</JDBCAppender>
+	</Appenders>
+
+	<Loggers>
+		<Root level="info">
+			<AppenderRef ref="Console" />
+		</Root>
+
+		<Logger level="info" name="com.orion10110.training.managertaxi"
+			additivity="false">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="RollingFile" />
+		</Logger>
+
+		<Logger level="error" name="com.orion10110.training.managertaxi"
+			additivity="false">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="SMTPAppender" />
+		</Logger>
+
+		<logger level="error" name="com.orion10110.training.managertaxi"
+			additivity="false">
+			<AppenderRef ref="Console" />
+			<appender-ref ref="JDBCAppender" />
+		</logger>
+	</Loggers>
+
+
+
+</Configuration>

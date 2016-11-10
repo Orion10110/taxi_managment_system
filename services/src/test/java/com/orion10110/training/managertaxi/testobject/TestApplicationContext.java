@@ -2,21 +2,23 @@ package com.orion10110.training.managertaxi.testobject;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Random;
 
 import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 
 import com.orion10110.taximanager.datamodel.ApplicationUser;
+import com.orion10110.taximanager.datamodel.Booking;
 import com.orion10110.taximanager.datamodel.Brand;
 import com.orion10110.taximanager.datamodel.Car;
 import com.orion10110.taximanager.datamodel.Client;
 import com.orion10110.taximanager.datamodel.Discount;
 import com.orion10110.taximanager.datamodel.District;
 import com.orion10110.taximanager.datamodel.Driver;
-import com.orion10110.taximanager.datamodel.Booking;
 import com.orion10110.taximanager.datamodel.Status;
 import com.orion10110.taximanager.datamodel.Street;
 import com.orion10110.taximanager.datamodel.TypeCar;
@@ -34,6 +36,8 @@ import com.orion10110.training.managertaxi.services.TypeCarService;
 @Configuration
 public class TestApplicationContext {
 
+	private Random random = new Random();
+	
 	@Inject
 	private DistrictService districtService;
 
@@ -65,101 +69,112 @@ public class TestApplicationContext {
 	private StatusService statusService;
 
 	@Bean
+	@Scope("prototype")
 	public TypeCar typeCar() {
 		TypeCar type = new TypeCar();
-		type.setType("TypeTest");
+		type.setType(String.format("TypeTest %s", random.nextInt(512)));
 		return type;
 	}
 
 	@Bean
+	@Scope("prototype")
 	public Brand brand() {
 		Brand br = new Brand();
-		br.setName("TestBrandName");
+		br.setName(String.format("TestBrandName %s", random.nextInt(512)));
 		return br;
 	}
 
 	@Bean
 	@Autowired
+	@Scope("prototype")
 	public Street street(District district) {
 		Long idDistrict = districtService.save(district);
 		Street st = new Street();
-		st.setName("TestStreetName");
+		st.setName(String.format("TestStreetName %s", random.nextInt(512)));
 		st.setIdDistrict(idDistrict);
 		return st;
 	}
 
 	@Bean
+	@Scope("prototype")
 	public District district() {
 		District ds = new District();
-		ds.setName("TestDistrictName");
+		ds.setName(String.format("TestDistrictName %s",random.nextInt(512)));
 		return ds;
 	}
 
 	@Bean
+	@Scope("prototype")
 	public Status status() {
 		Status st = new Status();
-		st.setStatus("TestStatus");
+		st.setStatus(String.format("TestStatus %s",random.nextInt(512)));
 		return st;
 	}
 
 	@Bean
+	@Scope("prototype")
 	public Discount discount() {
 		Discount ds = new Discount();
-		ds.setName("TestDiscount");
-		ds.setDiscountPercent(10);
+		ds.setName(String.format("TestDiscount %s",random.nextInt(512)));
+		ds.setDiscountPercent(random.nextInt(99));
 		return ds;
 	}
 
 	@Bean
 	@Autowired
+	@Scope("prototype")
 	public Car car(TypeCar typeCar, Brand brand) {
 		Long idTypeCar = typeCarService.save(typeCar);
 		Long idBrand = brandService.save(brand);
 		Car cr = new Car();
-		cr.setName("TestNameCar");
+		cr.setName(String.format("TestNameCar ",random.nextInt(512)));
 		cr.setIdBrand(idBrand);
 		cr.setIdType(idTypeCar);
-		cr.setPlace(5);
-		cr.setStars(5);
-		cr.setActive(true);
-		cr.setGosNumber("TestNumber");
+		cr.setPlace(random.nextInt(512));
+		cr.setStars(random.nextInt(512));
+		cr.setActive(random.nextBoolean());
+		cr.setGosNumber(String.format("TestNumber ",random.nextInt(512)));
 		return cr;
 	}
 
 	@Bean
+	@Scope("prototype")
 	@Autowired
 	public Driver driver(Car car, District district) {
 		Long idCar = carService.save(car);
 		Long idDistrict = districtService.save(district);
 		Driver dr = new Driver();
-		dr.setSecondName("TestSName");
-		dr.setFirstName("TestFName");
-		dr.setPatronymic("TestPatr");
-		dr.setPhoneNumber("11-11-11");
+		dr.setSecondName(String.format("TestSName %s",random.nextInt(512)));
+		dr.setFirstName(String.format("TestFName %s",random.nextInt(512)));
+		dr.setPatronymic(String.format("TestPatr %s",random.nextInt(512)));
+		dr.setPhoneNumber(String.format("11-11-11-%s",random.nextInt(512)));
 		dr.setIdCar(idCar);
 		dr.setIdDistrict(idDistrict);
-		LocalDateTime timeL = LocalDateTime.of(1990, 10, 12, 23, 33, 10);
+		LocalDateTime timeL = LocalDateTime.of(2000, random.nextInt(11)+1, random.nextInt(20)+1, random.nextInt(23),
+				random.nextInt(59), 10);
 		Timestamp timestamp = Timestamp.valueOf(timeL);
 		dr.setDateOfBirth(timestamp);
 		dr.setDateOfEmployment(timestamp);
-		dr.setCategory(5);
+		dr.setCategory(random.nextInt(10));
 		return dr;
 	}
 
 	@Bean
+	@Scope("prototype")
 	@Autowired
 	public Client client(Discount discount) {
 		Long idDiscount = discountService.save(discount);
 		Client cl = new Client();
-		cl.setSecondName("TestSName");
-		cl.setFirstName("TestFName");
-		cl.setPatronymic("TestPatr");
-		cl.setPhoneNumber("11-11-11");
+		cl.setSecondName(String.format("TestSName %s",random.nextInt(512)));
+		cl.setFirstName(String.format("TestFName %s",random.nextInt(512)));
+		cl.setPatronymic(String.format("TestPatr %s",random.nextInt(512)));
+		cl.setPhoneNumber(String.format("11-11-11-%s",random.nextInt(512)));
 		cl.setIdDiscount(idDiscount);
 		return cl;
 	}
 
 	@Bean
+	@Scope("prototype")
 	@Autowired
 	public Booking booking(ApplicationUser applicationUser, Street street, Client client, Driver driver, Status status) {
 		Long idAppUser = applicationUserService.save(applicationUser);
@@ -168,31 +183,33 @@ public class TestApplicationContext {
 		Long idStatus = statusService.save(status);
 		Long idStreet = streetService.save(street);
 		Booking ord = new Booking();
-		LocalDateTime loc = LocalDateTime.of(2003,10,10,03,30,30);
-		Timestamp timestamp = Timestamp.valueOf(loc);
+		LocalDateTime timeL = LocalDateTime.of(2000, random.nextInt(11)+1, random.nextInt(20)+1, random.nextInt(23),
+				random.nextInt(59), 10);
+		Timestamp timestamp = Timestamp.valueOf(timeL);
 		ord.setDateOrder(timestamp);
-		ord.setEndValue(200);
-		ord.setStartValue(100);
+		ord.setEndValue(random.nextInt(512));
+		ord.setStartValue(random.nextInt(512));
 		ord.setIdApplicationUser(idAppUser);
 		ord.setIdClient(idClient);
 		ord.setIdDriver(idDriver);
 		ord.setIdStatus(idStatus);
 		ord.setIdStreetFrom(idStreet);
 		ord.setIdStreetTo(idStreet);
-		ord.setPhoneNumber("10-10-10");
+		ord.setPhoneNumber(String.format("%s10-10-10-",random.nextInt(512)));
 		return ord;
 	}
 
 	@Bean
+	@Scope("prototype")
 	@Autowired
 	public ApplicationUser applicationUser() {
 		ApplicationUser aU = new ApplicationUser();
-		aU.setEmail("test@test.com");
-		aU.setEmailConfirmed(true);
-		aU.setPasswordHash("testpassword");
-		aU.setPhoneNumber("111-11-11");
-		aU.setPhoneNumberConfirmed(false);
-		aU.setUserName("test");
+		aU.setEmail(String.format("%sest@test.com",random.nextInt(512)));
+		aU.setEmailConfirmed(random.nextBoolean());
+		aU.setPasswordHash(String.format("testpassword%s",random.nextInt(512)));
+		aU.setPhoneNumber(String.format("111-11-11-%s",random.nextInt(512)));
+		aU.setPhoneNumberConfirmed(random.nextBoolean());
+		aU.setUserName(String.format("test ",random.nextInt(512)));
 		return aU;
 	}
 

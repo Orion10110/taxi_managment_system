@@ -11,18 +11,21 @@ import com.orion10110.taximanager.datamodel.Client;
 import com.orion10110.training.managertaxi.daodb.ClientDao;
 
 @Repository
-public class ClientDaoImpl extends GenericDaoImpl<Client,Long> implements ClientDao {
+public class ClientDaoImpl extends GenericDaoImpl<Client, Long> implements ClientDao {
 
 	@Override
 	protected String getSqlInsert() {
-		return "insert into client (first_name,second_name,patronymic,phone_number,id_discount)"
-				+" values(:firstName,:secondName,:patronymic,:phoneNumber,:idDiscount)";
+		String insert = String.format("insert into client (%s)  values(%s)", 
+				"first_name,second_name,patronymic,phone_number,id_discount",
+				":firstName,:secondName,:patronymic,:phoneNumber,:idDiscount");
+		return insert;
 	}
 
 	@Override
 	protected String getSqlUpdate() {
-		return "update client set first_name=:firstName,second_name=:secondName,patronymic=:patronymic,phone_number=:phoneNumber,"
-				+ "id_discount=:idDiscount where id=:id";
+		String update = String.format("update client set %s", 
+				"first_name=:firstName,second_name=:secondName,patronymic=:patronymic,phone_number=:phoneNumber,id_discount=:idDiscount where id=:id");
+		return update;
 	}
 
 	@Override

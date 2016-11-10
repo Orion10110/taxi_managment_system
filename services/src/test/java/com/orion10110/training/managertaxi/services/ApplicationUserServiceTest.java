@@ -3,16 +3,14 @@ package com.orion10110.training.managertaxi.services;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.List;
 import java.util.Random;
 
 import javax.inject.Inject;
 
-import org.junit.Assert;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.orion10110.taximanager.datamodel.ApplicationUser;
-import com.orion10110.taximanager.datamodel.Status;
 
 public class ApplicationUserServiceTest extends CrudTest<ApplicationUser> {
 	@Inject
@@ -48,7 +46,7 @@ public class ApplicationUserServiceTest extends CrudTest<ApplicationUser> {
 		testObject.setPhoneNumberConfirmed(random.nextBoolean());
 		testObject.setUserName(random.nextInt() + "");
 	}
-	
+
 	@Override
 	public void compare(ApplicationUser selected, ApplicationUser testObject) {
 		assertNotNull("selected is null", selected);
@@ -64,5 +62,10 @@ public class ApplicationUserServiceTest extends CrudTest<ApplicationUser> {
 	@Autowired
 	public void setApplicationUser(ApplicationUser appUser) {
 		setTestObject(appUser);
+	}
+
+	@Override
+	protected void saveAll(List<ApplicationUser> testObject) {
+		applicationUserServices.saveAll(testObject);
 	}
 }

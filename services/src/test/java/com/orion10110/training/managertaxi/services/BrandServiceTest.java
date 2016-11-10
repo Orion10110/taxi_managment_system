@@ -2,6 +2,7 @@ package com.orion10110.training.managertaxi.services;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.util.List;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -40,16 +41,21 @@ public class BrandServiceTest extends CrudTest<Brand> {
 		Random random = new Random();
 		testObject.setName(random.nextLong() + "");
 	}
-	
+
 	@Override
 	public void compare(Brand selected, Brand testObject) {
-        assertNotNull("selected is null", selected);
-        Assert.assertEquals(selected.getName(), testObject.getName());
-       
-    }
+		assertNotNull("selected is null", selected);
+		Assert.assertEquals(selected.getName(), testObject.getName());
+
+	}
 
 	@Autowired
 	public void setBrand(Brand brand) {
 		setTestObject(brand);
+	}
+
+	@Override
+	protected void saveAll(List<Brand> testObject) {
+		brandService.saveAll(testObject);
 	}
 }

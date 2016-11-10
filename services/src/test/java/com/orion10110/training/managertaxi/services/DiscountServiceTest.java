@@ -3,6 +3,7 @@ package com.orion10110.training.managertaxi.services;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.List;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -52,5 +53,10 @@ public class DiscountServiceTest extends CrudTest<Discount> {
 	@Autowired
 	public void setDiscount(Discount discount) {
 		setTestObject(discount);
+	}
+
+	@Override
+	protected void saveAll(List<Discount> testObject) {
+		discountServices.saveAll(testObject);
 	}
 }

@@ -4,22 +4,24 @@ import org.springframework.stereotype.Repository;
 
 import com.orion10110.taximanager.datamodel.Booking;
 import com.orion10110.training.managertaxi.daodb.BookingDao;
+
 @Repository
-public class BookingDaoImpl extends GenericDaoImpl<Booking,Long> implements BookingDao {
+public class BookingDaoImpl extends GenericDaoImpl<Booking, Long> implements BookingDao {
 
 	@Override
 	protected String getSqlInsert() {
-			return "insert booking (phone_number,id_client,id_status,date_order,start_value,"
-					+ "end_value,id_application_user,id_street_from,id_street_to,id_driver)"
-					+" values(:phoneNumber,:idClient,:idStatus,:dateOrder,:startValue,"
-					+ ":endValue,:idApplicationUser,:idStreetFrom,:idStreetTo,:idDriver)";
+		String insert = String.format("insert booking (%s) values(%s)",
+				"phone_number,id_client,id_status,date_order,start_value,end_value,id_application_user,id_street_from,id_street_to,id_driver",
+				":phoneNumber,:idClient,:idStatus,:dateOrder,:startValue,:endValue,:idApplicationUser,:idStreetFrom,:idStreetTo,:idDriver");
+		return insert;
 	}
 
 	@Override
 	protected String getSqlUpdate() {
-		return "update booking set phone_number=:phoneNumber,id_client=:idClient,id_status=:idStatus,date_order=:dateOrder,"
-				+ "start_value=:startValue,end_value=:endValue,id_application_user=:idApplicationUser,id_street_from=:idStreetFrom,"
-				+ "id_street_to=:idStreetTo,id_driver=:idDriver where id = :id";
+		String update = String.format("update booking set %s %s",
+				"phone_number=:phoneNumber,id_client=:idClient,id_status=:idStatus,date_order=:dateOrder,start_value=:startValue,end_value=:endValue,",
+				"id_application_user=:idApplicationUser,id_street_from=:idStreetFrom,id_street_to=:idStreetTo,id_driver=:idDriver where id = :id");
+		return update;
 	}
 
 	@Override

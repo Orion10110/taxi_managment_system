@@ -70,13 +70,13 @@ public abstract class GenericDaoImpl<T extends AbstractModel, PK extends Seriali
 
 	@Override
 	public void delete(PK id) {
-		this.jdbcTemplate.update("delete from " + getTable() + " where id = ?", id);
+		this.jdbcTemplate.update(String.format("delete from %s where id = ?", getTable()), id);
 
 	}
 
 	@Override
 	public T get(PK id) {
-		return (T)jdbcTemplate.queryForObject("select * from " + this.getTable() + " where id = ?", new Object[] { id },
+		return (T)jdbcTemplate.queryForObject(String.format("select * from %s where id = ?",this.getTable()), new Object[] { id },
 				getRowMapper());
 	}
 
@@ -88,7 +88,7 @@ public abstract class GenericDaoImpl<T extends AbstractModel, PK extends Seriali
 
 	@Override
 	public List<T> getAll() {
-		return (List<T>)jdbcTemplate.query("select * from " + this.getTable(),
+		return (List<T>)jdbcTemplate.query(String.format("select * from ", this.getTable()),
 				getRowMapper());
 	}
 

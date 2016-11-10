@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -16,6 +17,12 @@ public class TypeCarServiceTest extends CrudTest<TypeCar> {
 	@Inject
 	private TypeCarService typeCarServices;
 
+	
+	@Override
+	public void saveAll(List<TypeCar> testObject) {
+		typeCarServices.saveAll(testObject);
+	}
+	
 	@Override
 	public void delete(TypeCar testObject) {
 		typeCarServices.delete(testObject.getId());
@@ -43,16 +50,18 @@ public class TypeCarServiceTest extends CrudTest<TypeCar> {
 		testObject.setType(random.nextLong() + "");
 
 	}
-	
+
 	@Override
 	public void compare(TypeCar selected, TypeCar testObject) {
-        assertNotNull("selected is null", selected);
-        assertEquals(selected.getType(), testObject.getType());
-       
-    }
+		assertNotNull("selected is null", selected);
+		assertEquals(selected.getType(), testObject.getType());
+
+	}
 
 	@Autowired
 	public void setTypeCar(TypeCar typeCar) {
 		setTestObject(typeCar);
 	}
+
+
 }

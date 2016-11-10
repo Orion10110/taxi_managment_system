@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -19,13 +20,6 @@ public class DriverServiceTest extends CrudTest<Driver> {
 	@Inject
 	private DriverService driverServices;
 
-	@Inject
-	private CarService carServices;
-
-	@Inject
-	private DistrictService districtServices;
-
-	
 	@Override
 	public void delete(Driver testObject) {
 		driverServices.delete(testObject.getId());
@@ -79,6 +73,11 @@ public class DriverServiceTest extends CrudTest<Driver> {
 	@Autowired
 	public void setDriver(Driver driver) {
 		setTestObject(driver);
+	}
+
+	@Override
+	protected void saveAll(List<Driver> testObject) {
+		driverServices.saveAll(testObject);
 	}
 	
 }
