@@ -1,15 +1,8 @@
 package com.orion10110.training.managertaxi.services;
 
-import javax.inject.Inject;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import com.orion10110.taximanager.datamodel.TypeCar;
-import com.orion10110.training.managertaxi.daodb.BookingDao;
-import com.orion10110.training.managertaxi.services.impl.GenericServiceImpl;
-import com.orion10110.training.managertaxi.services.impl.TypeCarServiceImpl;
 
 public class st {
 	

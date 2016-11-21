@@ -1,17 +1,18 @@
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>com.orion10110.training.managertaxi</groupId>
-    <artifactId>taxi_managment_system</artifactId>
-    <version>1.0.0</version>
-  </parent>
-  <groupId>com.orion10110.training.managertaxi</groupId>
-  <artifactId>dao-api</artifactId>
-  <name>dao-api</name>
-  <url>http://maven.apache.org</url>
-  
-  <dependencies>
-    
-  </dependencies>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.orion10110.training.managertaxi</groupId>
+		<artifactId>taxi_managment_system</artifactId>
+		<version>1.0.0</version>
+	</parent>
+	<artifactId>dao-api</artifactId>
+	<packaging>jar</packaging>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.orion10110.training.managertaxi</groupId>
+			<artifactId>datamodel</artifactId>
+		</dependency>
+	</dependencies>
 </project>

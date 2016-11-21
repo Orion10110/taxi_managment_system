@@ -1,21 +1,26 @@
 package com.orion10110.training.managertaxi.services;
 
-import java.io.Serializable;
 import java.util.List;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.orion10110.taximanager.datamodel.AbstractModel;
 
-public interface GenericService<T extends AbstractModel, PK extends Serializable> {
+public interface GenericService<T extends AbstractModel> {
 	@Transactional
-	void saveAll(List<T> entity);
-
-	PK save(T entity);
-
-	T get(PK id);
-
+	void saveAll(List<T> entities);
+	
 	List<T> getAll();
-
-	PK delete(PK id);
+	
+	@CachePut(value="dbCache", keyGenerator="entityKeyGenerator")
+	Long save(T entity);
+	
+	@Cacheable(value="dbCache", keyGenerator="namedKeyGenerator")
+	T get(Long id);
+	
+	@CacheEvict(value="dbCache", keyGenerator="namedKeyGenerator")
+	Long delete(Long id);
 }

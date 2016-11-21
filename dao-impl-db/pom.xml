@@ -16,14 +16,24 @@
 			<artifactId>datamodel</artifactId>
 		</dependency>
 
-			<dependency>
-			  <groupId>com.microsoft.sqlserver</groupId>
-			  <artifactId>sqljdbc4</artifactId>
-			</dependency>
-		
+		<dependency>
+			<groupId>com.orion10110.training.managertaxi</groupId>
+			<artifactId>dao-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>sqljdbc4</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
 		</dependency>
 
 		<dependency>
@@ -48,9 +58,13 @@
 			<groupId>javax.inject</groupId>
 			<artifactId>javax.inject</artifactId>
 		</dependency>
-		
-		
-			
-		
+
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+		</dependency>
+
+
+
 	</dependencies>
 </project>

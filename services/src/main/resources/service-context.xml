@@ -15,15 +15,11 @@
 	    http://www.springframework.org/schema/task/spring-task-3.0.xsd">
 
 
-	<import resource="classpath:applicationConnectJdbc.xml" />
-
+	<!-- <import resource="classpath:db-dao-bean.xml" /> -->
+	<import resource="classpath:xml-dao-bean.xml" />
+	<import resource="classpath:service-cash.xml" />
 	<context:annotation-config />
 
 	<context:component-scan
-		base-package="com.orion10110.training.managertaxi.services.impl" />
-	<context:component-scan
-		base-package="com.orion10110.training.managertaxi.daodb.impl" />
-	
-
-
+		base-package="com.orion10110.training.managertaxi.services" />
 </beans>

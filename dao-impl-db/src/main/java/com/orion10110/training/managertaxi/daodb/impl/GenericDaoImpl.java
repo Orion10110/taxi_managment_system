@@ -1,10 +1,7 @@
 package com.orion10110.training.managertaxi.daodb.impl;
 
-import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -20,23 +17,17 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.orion10110.taximanager.datamodel.AbstractModel;
-import com.orion10110.training.managertaxi.daodb.GenericDao;
+import com.orion10110.training.managertaxi.daoapi.GenericDao;
+import com.orion10110.training.managertaxi.daodb.util.GenerateSql;
 
 @Repository
-public abstract class GenericDaoImpl<T extends AbstractModel, PK extends Serializable> implements GenericDao<T, PK> {
+public abstract class GenericDaoImpl<T extends AbstractModel> implements GenericDao<T> {
 	@Inject
 	protected JdbcTemplate jdbcTemplate;
 	
 	@Inject
 	@Qualifier("namedParameterJdbcTemplate")
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-
-	
-	protected abstract String getSqlInsert();
-
-	protected abstract String getSqlUpdate();
-
-	protected abstract String getTable();
 
 	private Class<? extends T> daoType;
 	
@@ -57,38 +48,38 @@ public abstract class GenericDaoImpl<T extends AbstractModel, PK extends Seriali
 	
 	
 	@Override
-	public PK insert(final T transientObject) {
+	public Long insert(final T transientObject) {
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 				
-		this.namedParameterJdbcTemplate.update(getSqlInsert(), new BeanPropertySqlParameterSource(transientObject),
+		this.namedParameterJdbcTemplate.update(GenerateSql.generateSqlInsert(daoType), new BeanPropertySqlParameterSource(transientObject),
 				keyHolder, new String[] { "id" });
 
 		Long key = keyHolder.getKey().longValue();
 		transientObject.setId(key);
-		return (PK) key;
+		return (Long) key;
 	}
 
 	@Override
-	public void delete(PK id) {
-		this.jdbcTemplate.update(String.format("delete from %s where id = ?", getTable()), id);
+	public void delete(Long id) {
+		this.jdbcTemplate.update(GenerateSql.generateSqlDelete(daoType), id);
 
 	}
 
 	@Override
-	public T get(PK id) {
-		return (T)jdbcTemplate.queryForObject(String.format("select * from %s where id = ?",this.getTable()), new Object[] { id },
+	public T get(Long id) {
+		return (T)jdbcTemplate.queryForObject(GenerateSql.generateSqlGetId(daoType), new Object[] { id },
 				getRowMapper());
 	}
 
 	@Override
 	public void update(T transientObject) {
 
-		this.namedParameterJdbcTemplate.update(getSqlUpdate(), new BeanPropertySqlParameterSource(transientObject));
+		this.namedParameterJdbcTemplate.update(GenerateSql.generateSqlUpdate(daoType), new BeanPropertySqlParameterSource(transientObject));
 	}
 
 	@Override
 	public List<T> getAll() {
-		return (List<T>)jdbcTemplate.query(String.format("select * from ", this.getTable()),
+		return (List<T>)jdbcTemplate.query(GenerateSql.generateSqlSelect(daoType),
 				getRowMapper());
 	}
 

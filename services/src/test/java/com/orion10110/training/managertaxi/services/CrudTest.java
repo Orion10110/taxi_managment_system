@@ -18,8 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.orion10110.taximanager.datamodel.AbstractModel;
 
-@Transactional
-@TransactionConfiguration(defaultRollback = true)
 public abstract class CrudTest<T extends AbstractModel> extends AbstractTest {
 
 	protected T testObject;
