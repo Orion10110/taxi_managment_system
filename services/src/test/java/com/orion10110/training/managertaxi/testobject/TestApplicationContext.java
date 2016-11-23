@@ -8,8 +8,8 @@ import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.orion10110.taximanager.datamodel.ApplicationUser;
 import com.orion10110.taximanager.datamodel.Booking;
@@ -33,7 +33,7 @@ import com.orion10110.training.managertaxi.services.StatusService;
 import com.orion10110.training.managertaxi.services.StreetService;
 import com.orion10110.training.managertaxi.services.TypeCarService;
 
-@Configuration
+@Component
 public class TestApplicationContext {
 
 	private Random random = new Random();

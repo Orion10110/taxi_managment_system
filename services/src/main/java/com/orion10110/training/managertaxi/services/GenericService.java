@@ -8,11 +8,13 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.orion10110.taximanager.datamodel.AbstractModel;
+import com.orion10110.training.managertaxi.services.aspect.CacheList;
 
 public interface GenericService<T extends AbstractModel> {
 	@Transactional
 	void saveAll(List<T> entities);
 	
+	@CacheList(value="dbCache", keyGenerator="entityKeyGenerator")
 	List<T> getAll();
 	
 	@CachePut(value="dbCache", keyGenerator="entityKeyGenerator")

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.orion10110.taximanager.datamodel.AbstractModel;
 import com.orion10110.training.managertaxi.daoapi.GenericDao;
 import com.orion10110.training.managertaxi.services.GenericService;
+import com.orion10110.training.managertaxi.services.aspect.CacheList;
 
 @Service
 public class GenericServiceImpl<T extends AbstractModel> implements GenericService<T> {
@@ -62,6 +63,7 @@ public class GenericServiceImpl<T extends AbstractModel> implements GenericServi
 	}
 
 	@Override
+	@CacheList(value="dbCache", keyGenerator="entityKeyGenerator")
 	public List<T> getAll() {
 		return genericDao.getAll();
 	}
