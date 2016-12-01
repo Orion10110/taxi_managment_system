@@ -88,7 +88,7 @@ public class TestApplicationContext {
 	@Autowired
 	@Scope("prototype")
 	public Street street(District district) {
-		Long idDistrict = districtService.save(district);
+		Long idDistrict = districtService.save(district).getId();
 		Street st = new Street();
 		st.setName(String.format("TestStreetName %s", random.nextInt(512)));
 		st.setIdDistrict(idDistrict);
@@ -124,8 +124,8 @@ public class TestApplicationContext {
 	@Autowired
 	@Scope("prototype")
 	public Car car(TypeCar typeCar, Brand brand) {
-		Long idTypeCar = typeCarService.save(typeCar);
-		Long idBrand = brandService.save(brand);
+		Long idTypeCar = typeCarService.save(typeCar).getId();
+		Long idBrand = brandService.save(brand).getId();
 		Car cr = new Car();
 		cr.setName(String.format("TestNameCar ",random.nextInt(512)));
 		cr.setIdBrand(idBrand);
@@ -141,8 +141,8 @@ public class TestApplicationContext {
 	@Scope("prototype")
 	@Autowired
 	public Driver driver(Car car, District district) {
-		Long idCar = carService.save(car);
-		Long idDistrict = districtService.save(district);
+		Long idCar = carService.save(car).getId();
+		Long idDistrict = districtService.save(district).getId();
 		Driver dr = new Driver();
 		dr.setSecondName(String.format("TestSName %s",random.nextInt(512)));
 		dr.setFirstName(String.format("TestFName %s",random.nextInt(512)));
@@ -163,7 +163,7 @@ public class TestApplicationContext {
 	@Scope("prototype")
 	@Autowired
 	public Client client(Discount discount) {
-		Long idDiscount = discountService.save(discount);
+		Long idDiscount = discountService.save(discount).getId();
 		Client cl = new Client();
 		cl.setSecondName(String.format("TestSName %s",random.nextInt(512)));
 		cl.setFirstName(String.format("TestFName %s",random.nextInt(512)));
@@ -177,11 +177,11 @@ public class TestApplicationContext {
 	@Scope("prototype")
 	@Autowired
 	public Booking booking(ApplicationUser applicationUser, Street street, Client client, Driver driver, Status status) {
-		Long idAppUser = applicationUserService.save(applicationUser);
-		Long idClient = clientService.save(client);
-		Long idDriver = driverService.save(driver);
-		Long idStatus = statusService.save(status);
-		Long idStreet = streetService.save(street);
+		Long idAppUser = applicationUserService.save(applicationUser).getId();
+		Long idClient = clientService.save(client).getId();
+		Long idDriver = driverService.save(driver).getId();
+		Long idStatus = statusService.save(status).getId();
+		Long idStreet = streetService.save(street).getId();
 		Booking ord = new Booking();
 		LocalDateTime timeL = LocalDateTime.of(2000, random.nextInt(11)+1, random.nextInt(20)+1, random.nextInt(23),
 				random.nextInt(59), 10);

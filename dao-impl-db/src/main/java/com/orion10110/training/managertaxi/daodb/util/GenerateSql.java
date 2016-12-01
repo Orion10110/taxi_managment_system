@@ -7,6 +7,8 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.orion10110.taximanager.datamodel.anotation.IgnoreField;
+
 public final class GenerateSql {
 
 	public static String generateSqlInsert(Class model) {
@@ -15,8 +17,7 @@ public final class GenerateSql {
 
 		List<String> nameFields = getListField(model);
 		String insert = String.format("insert into %s (%s) values(:%s)", dbName,
-				UPPER_CAMEL.to(LOWER_UNDERSCORE, String.join(",", nameFields)),
-				String.join(",:", nameFields));
+				UPPER_CAMEL.to(LOWER_UNDERSCORE, String.join(",", nameFields)), String.join(",:", nameFields));
 		return insert;
 	}
 
@@ -25,7 +26,10 @@ public final class GenerateSql {
 		List<String> vals = new ArrayList<>();
 
 		for (Field field : fields) {
-			vals.add(field.getName());
+			if (field.getAnnotation(IgnoreField.class) == null) {
+				vals.add(field.getName());
+			}
+
 		}
 		return vals;
 	}

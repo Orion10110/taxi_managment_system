@@ -18,8 +18,8 @@
 	    http://www.springframework.org/schema/task/spring-task-3.0.xsd">
 
 	<aop:aspectj-autoproxy />
-	<!-- <import resource="classpath:db-dao-bean.xml" /> -->
-	<import resource="classpath:xml-dao-bean.xml" />
+	 <import resource="classpath:db-dao-bean.xml" />
+<!-- 	<import resource="classpath:xml-dao-bean.xml" />  -->
 	<import resource="classpath:service-cash.xml" />
 	<context:annotation-config />
 	

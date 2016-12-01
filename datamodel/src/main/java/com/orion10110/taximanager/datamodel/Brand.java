@@ -1,6 +1,13 @@
 package com.orion10110.taximanager.datamodel;
 
+import com.orion10110.taximanager.datamodel.anotation.IgnoreField;
+
 public class Brand extends AbstractModel {
+	/**
+	 * 
+	 */
+	@IgnoreField
+	private static final long serialVersionUID = 1L;
 	private String name;
 
 	public String getName() {
@@ -10,4 +17,12 @@ public class Brand extends AbstractModel {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	@Override
+	public String toString() {
+		return "Brand [name=" + name + ", getId()=" + getId() + "]";
+	}
+
+
+	
 }

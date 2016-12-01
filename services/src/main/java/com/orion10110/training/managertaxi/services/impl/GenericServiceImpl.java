@@ -10,6 +10,8 @@ import com.orion10110.taximanager.datamodel.AbstractModel;
 import com.orion10110.training.managertaxi.daoapi.GenericDao;
 import com.orion10110.training.managertaxi.services.GenericService;
 import com.orion10110.training.managertaxi.services.aspect.CacheList;
+import com.orion10110.training.managertaxi.services.aspect.ListCacheEvict;
+import com.orion10110.training.managertaxi.services.aspect.ListCachePut;
 
 @Service
 public class GenericServiceImpl<T extends AbstractModel> implements GenericService<T> {
@@ -26,29 +28,27 @@ public class GenericServiceImpl<T extends AbstractModel> implements GenericServi
 	}
 
 	@Override
-	public Long save(T entity) {
+	@ListCachePut(value="dbCache")
+	public T save(T entity) {
 		if (entity.getId() == null) {
 			LOGGER.info("Create. id={}, class={}", entity.getId(), entity.getClass().getName());
-			return (Long) genericDao.insert(entity);
+			entity.setId((Long) genericDao.insert(entity));
+			return entity;
 		} else {
 			LOGGER.info("Update. id={}, class={}", entity.getId(), entity.getClass().getName());
 			genericDao.update(entity);
-			return (Long) entity.getId();
+			return entity;
 		}
 	}
 
 	@Override
 	public T get(Long id) {
-		  try {
-	            long time = (long) (5000L);
-	            Thread.sleep(time);
-	        } catch (InterruptedException e) {
-	            throw new IllegalStateException(e);
-	        }
+		 
 		return genericDao.get(id);
 	}
 
 	@Override
+	@ListCacheEvict("dbCache")
 	public Long delete(Long id) {
 		genericDao.delete(id);
 		return id;
@@ -65,6 +65,12 @@ public class GenericServiceImpl<T extends AbstractModel> implements GenericServi
 	@Override
 	@CacheList(value="dbCache", keyGenerator="entityKeyGenerator")
 	public List<T> getAll() {
+		 try {
+	            long time = (long) (5000L);
+	            Thread.sleep(time);
+	        } catch (InterruptedException e) {
+	            throw new IllegalStateException(e);
+	        }
 		return genericDao.getAll();
 	}
 

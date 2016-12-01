@@ -3,7 +3,14 @@ package com.orion10110.taximanager.datamodel;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import com.orion10110.taximanager.datamodel.anotation.IgnoreField;
+
 public class Booking extends AbstractModel {
+	/**
+	 * 
+	 */
+	@IgnoreField
+	private static final long serialVersionUID = 1L;
 	private Long idClient;
 	private Long idDriver;
 	private Long idStatus;

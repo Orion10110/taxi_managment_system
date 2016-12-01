@@ -15,10 +15,10 @@ import org.springframework.core.annotation.AliasFor;
 @Target(ElementType.METHOD)
 public @interface CacheList {
 	@AliasFor("cacheNames")
-	String[] value() default {};
+	String value() default "";
 	
 	@AliasFor("value")
-	String[] cacheNames() default {};
+	String cacheNames() default "";
 	
 	String keyGenerator() default "";
 }

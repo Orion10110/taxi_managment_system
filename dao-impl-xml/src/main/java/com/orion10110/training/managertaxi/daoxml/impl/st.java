@@ -2,9 +2,6 @@ package com.orion10110.training.managertaxi.daoxml.impl;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.orion10110.taximanager.datamodel.Brand;
-import com.orion10110.training.managertaxi.daoxml.util.UpdateFieldsReflectuin;
-
 public class st {
 
 	public static void main(String[] args) {

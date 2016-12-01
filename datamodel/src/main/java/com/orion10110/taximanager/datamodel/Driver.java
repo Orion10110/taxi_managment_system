@@ -2,7 +2,14 @@ package com.orion10110.taximanager.datamodel;
 
 import java.sql.Timestamp;
 
+import com.orion10110.taximanager.datamodel.anotation.IgnoreField;
+
 public class Driver extends AbstractModel {
+	/**
+	 * 
+	 */
+	@IgnoreField
+	private static final long serialVersionUID = 1L;
 	private String firstName;
 	private String secondName;
 	private String patronymic;

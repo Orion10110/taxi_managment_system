@@ -16,5 +16,5 @@
 	<import resource="classpath:application-jdbc-connect.xml" />
 
 	<context:component-scan
-		base-package="com.orion10110.training.managertaxi.daoxml" />
+		base-package="com.orion10110.training.managertaxi.daodb.impl" />
 </beans>

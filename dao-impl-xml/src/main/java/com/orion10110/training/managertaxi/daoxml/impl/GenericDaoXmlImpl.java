@@ -8,19 +8,15 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.orion10110.taximanager.datamodel.AbstractModel;
-import com.orion10110.taximanager.datamodel.Brand;
 import com.orion10110.training.managertaxi.daoapi.GenericDao;
-import com.orion10110.training.managertaxi.daoxml.util.UpdateFieldsReflectuin;
 import com.thoughtworks.xstream.XStream;
 
 @Repository
@@ -96,16 +92,17 @@ public abstract class GenericDaoXmlImpl<T extends AbstractModel> implements Gene
 
 	@Override
 	public void update(T entity) {
-		List<T> allBrands = readCollection();
-		T changedEntity = getEntity(entity.getId(), allBrands);
-		UpdateFieldsReflectuin<T> updater = new UpdateFieldsReflectuin<T>();
-		updater.UpdateFields(changedEntity, entity);
-		writeCollection(allBrands);
+		List<T> allEntities = readCollection();
+		T changedEntity = getEntity(entity.getId(), allEntities);
+/*		UpdateFieldsReflectuin<T> updater = new UpdateFieldsReflectuin<T>();
+		updater.UpdateFields(changedEntity, entity);*/
+		int index =allEntities.indexOf(changedEntity);
+		allEntities.set(index, entity);
+		writeCollection(allEntities);
 	}
 
 	protected T getEntity(Long id, List<T> list) {
-		Predicate<T> predicate = c -> c.getId().equals(id);
-		T obj = list.stream().filter(predicate).findFirst().get();
+		T obj = list.stream().filter(c->c.getId().equals(id)).findFirst().get();
 		return obj;
 	}
 

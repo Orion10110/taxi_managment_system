@@ -24,5 +24,12 @@
  -->
  <bean id="cacheManager"
       class="org.springframework.cache.guava.GuavaCacheManager"/>
+      
+    <!--  <bean id="cacheManager"
+      class="org.springframework.cache.ehcache.EhCacheCacheManager" p:cache-manager-ref="ehcache" scope="singleton"/>
 
+EhCache library setup
+ <bean id="ehcache"
+      class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" p:config-location="ehcache.xml"/>
+ -->
 </beans>
