@@ -16,5 +16,5 @@
 	<mvc:annotation-driven />
 	
 	<context:component-scan base-package="com.orion10110.training.managertaxi.web.controller" />
-	<import resource="classpath:service-context.xml" />
+	
 </beans>
