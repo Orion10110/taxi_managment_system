@@ -3,7 +3,6 @@ package com.orion10110.training.managertaxi.web.servlets;
 import java.nio.charset.Charset;
 import java.util.Base64;
 import java.util.Enumeration;
-import java.util.Map;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -11,28 +10,40 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.orion10110.training.managertaxi.services.AuthenticationService;
+import com.orion10110.training.managertaxi.services.components.UserDataStorage;
 
 public class BasicAuthFilter implements Filter{
 	   private AuthenticationService authService;
+	   
+	   private UserDataStorage userDataStorage;
+	   
+	   private ApplicationContext appContext;
 
 	   @Override
 	    public void init(FilterConfig config) throws ServletException {
-	        authService = WebApplicationContextUtils
-	                .getRequiredWebApplicationContext(
-	                        config.getServletContext()).getBean(
-	                        AuthenticationService.class);
+		   WebApplicationContext context = WebApplicationContextUtils.getRequiredWebApplicationContext(config
+	                .getServletContext());
+	        authService = context.getBean(AuthenticationService.class);
+	        appContext = context;
 	    }
 
 	    @Override
 	    public void doFilter(ServletRequest request,
 	            ServletResponse response, FilterChain chain)
 	            throws java.io.IOException, ServletException {
-	        org.eclipse.jetty.server.Request req = (org.eclipse.jetty.server.Request) request;
-	        org.eclipse.jetty.server.Response res = (org.eclipse.jetty.server.Response) response;
+	    	HttpServletRequest req = (HttpServletRequest) request;
+	        HttpServletResponse res = (HttpServletResponse) response;
+	       
+	        userDataStorage = appContext.getBean(UserDataStorage.class);
+	        
 	        String[] credentials = resolveCredentials(req);
 	      boolean isCredentailsResolved = credentials != null && credentials.length==2;
 	      if(!isCredentailsResolved){
@@ -43,6 +54,7 @@ public class BasicAuthFilter implements Filter{
 	        String username = credentials[0];
 	        String password = credentials[1];
 	        if (authService.validateUserPassword(username, password)) {
+	        	userDataStorage.setLoggedIn(true);
 	            chain.doFilter(request, response);
 	        } else {
 	            res.sendError(401);
@@ -50,7 +62,7 @@ public class BasicAuthFilter implements Filter{
 
 	    }
 
-	    private String[] resolveCredentials(org.eclipse.jetty.server.Request req) {
+	    private String[] resolveCredentials(HttpServletRequest req) {
 	        try {
 	            Enumeration<String> headers = req.getHeaders("Authorization");
 	            String nextElement = headers.nextElement();

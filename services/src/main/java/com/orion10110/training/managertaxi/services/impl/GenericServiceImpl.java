@@ -65,12 +65,7 @@ public class GenericServiceImpl<T extends AbstractModel> implements GenericServi
 	@Override
 	@CacheList(value="dbCache", keyGenerator="entityKeyGenerator")
 	public List<T> getAll() {
-		 try {
-	            long time = (long) (5000L);
-	            Thread.sleep(time);
-	        } catch (InterruptedException e) {
-	            throw new IllegalStateException(e);
-	        }
+		
 		return genericDao.getAll();
 	}
 
