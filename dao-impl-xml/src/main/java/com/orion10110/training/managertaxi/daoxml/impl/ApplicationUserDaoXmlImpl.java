@@ -8,4 +8,9 @@ import com.orion10110.training.managertaxi.daoapi.ApplicationUserDao;
 @Repository
 public class ApplicationUserDaoXmlImpl extends GenericDaoXmlImpl<ApplicationUser> implements ApplicationUserDao {
 
+	@Override
+	public ApplicationUser getByName(String name) {
+		   throw new UnsupportedOperationException();
+	}
+
 }

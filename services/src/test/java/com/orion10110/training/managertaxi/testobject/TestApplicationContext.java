@@ -204,12 +204,10 @@ public class TestApplicationContext {
 	@Autowired
 	public ApplicationUser applicationUser() {
 		ApplicationUser aU = new ApplicationUser();
-		aU.setEmail(String.format("%sest@test.com",random.nextInt(512)));
-		aU.setEmailConfirmed(random.nextBoolean());
-		aU.setPasswordHash(String.format("testpassword%s",random.nextInt(512)));
-		aU.setPhoneNumber(String.format("111-11-11-%s",random.nextInt(512)));
-		aU.setPhoneNumberConfirmed(random.nextBoolean());
-		aU.setUserName(String.format("test ",random.nextInt(512)));
+		aU.setEmail(String.format("%sest@test.com",random.nextInt(1000000)));
+		aU.setPasswordHash(String.format("testpassword%s",random.nextInt(1000000)));
+		aU.setPhoneNumber(String.format("111-11-11-%s",random.nextInt(1000000)));
+		aU.setUserName(String.format("test%s ",random.nextInt(1000000)));
 		return aU;
 	}
 

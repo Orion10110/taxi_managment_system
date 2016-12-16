@@ -8,14 +8,23 @@ public class Status extends AbstractModel{
 	 */
 	@IgnoreField
 	private static final long serialVersionUID = 1L;
-	private String Status;
+	private String status;
+	private String statusEn;
+	
+	public String getStatusEn() {
+		return statusEn;
+	}
+
+	public void setStatusEn(String statusEn) {
+		this.statusEn = statusEn;
+	}
 
 	public String getStatus() {
-		return Status;
+		return this.status;
 	}
 
 	public void setStatus(String status) {
-		Status = status;
+		this.status = status;
 	}
 	
 }

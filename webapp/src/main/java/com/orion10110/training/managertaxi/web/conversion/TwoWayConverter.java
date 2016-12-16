@@ -14,8 +14,8 @@ import org.springframework.core.convert.converter.GenericConverter;
 
 public class TwoWayConverter<S, T> implements GenericConverter {
 
-	private Class<S> classOfS;
-	private Class<T> classOfT;
+	protected Class<S> classOfS;
+	protected Class<T> classOfT;
 
 	protected TwoWayConverter() {
 		ParameterizedType pt = (ParameterizedType) this.getClass().getGenericSuperclass();

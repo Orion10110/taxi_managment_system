@@ -9,11 +9,18 @@ public class ApplicationUser extends AbstractModel {
 	@IgnoreField
 	private static final long serialVersionUID = 1L;
 	private String email;
-	private Boolean emailConfirmed;
 	private String passwordHash;
 	private String phoneNumber;
-	private Boolean phoneNumberConfirmed;
 	private String userName;
+	private String role;
+	
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
 
 	public String getEmail() {
 		return email;
@@ -23,13 +30,6 @@ public class ApplicationUser extends AbstractModel {
 		this.email = email;
 	}
 
-	public Boolean getEmailConfirmed() {
-		return emailConfirmed;
-	}
-
-	public void setEmailConfirmed(Boolean emailConfirmed) {
-		this.emailConfirmed = emailConfirmed;
-	}
 
 	public String getPasswordHash() {
 		return passwordHash;
@@ -47,13 +47,6 @@ public class ApplicationUser extends AbstractModel {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public Boolean getPhoneNumberConfirmed() {
-		return phoneNumberConfirmed;
-	}
-
-	public void setPhoneNumberConfirmed(Boolean phoneNumberConfirmed) {
-		this.phoneNumberConfirmed = phoneNumberConfirmed;
-	}
 
 	public String getUserName() {
 		return userName;

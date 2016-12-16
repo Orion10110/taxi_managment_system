@@ -40,10 +40,8 @@ public class ApplicationUserServiceTest extends CrudTest<ApplicationUser> {
 	public void changeTestObject(ApplicationUser testObject) {
 		Random random = new Random();
 		testObject.setEmail(random.nextInt() + "");
-		testObject.setEmailConfirmed(random.nextBoolean());
 		testObject.setPasswordHash(random.nextInt() + "");
 		testObject.setPhoneNumber(random.nextInt() + "");
-		testObject.setPhoneNumberConfirmed(random.nextBoolean());
 		testObject.setUserName(random.nextInt() + "");
 	}
 
@@ -51,10 +49,8 @@ public class ApplicationUserServiceTest extends CrudTest<ApplicationUser> {
 	public void compare(ApplicationUser selected, ApplicationUser testObject) {
 		assertNotNull("selected is null", selected);
 		assertEquals(selected.getEmail(), testObject.getEmail());
-		assertEquals(selected.getEmailConfirmed(), testObject.getEmailConfirmed());
 		assertEquals(selected.getPasswordHash(), testObject.getPasswordHash());
 		assertEquals(selected.getPhoneNumber(), testObject.getPhoneNumber());
-		assertEquals(selected.getPhoneNumberConfirmed(), testObject.getPhoneNumberConfirmed());
 		assertEquals(selected.getUserName(), testObject.getUserName());
 
 	}

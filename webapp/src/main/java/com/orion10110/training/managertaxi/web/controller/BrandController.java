@@ -16,9 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.orion10110.taximanager.datamodel.Brand;
+import com.orion10110.training.managertaxi.services.ApplicationUserService;
 import com.orion10110.training.managertaxi.services.BrandService;
-import com.orion10110.training.managertaxi.services.components.UserDataStorage;
 import com.orion10110.training.managertaxi.web.model.BrandModel;
+import com.orion10110.training.managertaxi.web.security.aspect.RoleAccess;
 
 @RestController
 @RequestMapping("/brands")
@@ -28,16 +29,24 @@ public class BrandController {
 	@Inject
 	private BrandService service;
 	@Inject
+	private ApplicationUserService userService;
+	@Inject
 	private ConversionService conversionService;
-
+	
+	@RoleAccess("Admin")
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<BrandModel>> getAll() {
+		// UserModel us
+		// =conversionService.convert(userService.get(2l),UserModel.class);
+		// JwtAuthentication dof = new JwtAuthentication();
+		//String usToken = dof.createJWT("aswe", us, 3600*60);
+		//dof.parseJWT(usToken);
 		List<Brand> source = service.getAll();
 		TypeDescriptor sourceType = TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(Brand.class));
 		TypeDescriptor targetType = TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(BrandModel.class));
 		List<BrandModel> target = (List<BrandModel>) conversionService.convert(source, sourceType, targetType);
-		UserDataStorage userDataStorage = context.getBean(UserDataStorage.class);
-        System.out.println("AuthorControllerP:" + userDataStorage);
+//		UserDataStorage userDataStorage = context.getBean(UserDataStorage.class);
+//        System.out.println("AuthorControllerP:" + userDataStorage);
 		return new ResponseEntity<List<BrandModel>>(target, HttpStatus.OK);
 	}
 

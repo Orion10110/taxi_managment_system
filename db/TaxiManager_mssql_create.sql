@@ -42,8 +42,7 @@ GO
 CREATE TABLE [status] (
 	id integer NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	status varchar(64) NOT NULL,
- 
-
+ 	status_en varchar(64) NULL,
 )
 GO
 CREATE TABLE [booking] (
@@ -85,13 +84,12 @@ CREATE TABLE [car] (
 GO
 CREATE TABLE [application_user] (
 	id integer NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	email varchar(256) NOT NULL,
-	email_confirmed bit NOT NULL,
+	email varchar(256) NOT NULL UNIQUE,
 	password_hash varchar(max) NOT NULL,
 	phone_number varchar(64) NOT NULL,
-	phone_number_confirmed bit NOT NULL,
-	user_name varchar(256) NOT NULL,
-  
+	user_name varchar(256) NOT NULL UNIQUE,
+    role varchar(256),
+
 
 )
 GO
@@ -105,15 +103,16 @@ GO
 CREATE TABLE [type_car] (
 	id integer NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	type varchar(128) NOT NULL,
+	type_en varchar(64) NULL,
 
 )
 
 CREATE TABLE logs
-   (USER_ID VARCHAR(20)    NOT NULL,
-    DATED   DATE           NOT NULL,
-    LOGGER  VARCHAR(50)    NOT NULL,
-    LEVEL   VARCHAR(10)    NOT NULL,
-    MESSAGE VARCHAR(1000)  NOT NULL
+   (USER_ID VARCHAR(max)    NULL,
+    DATED   DATE            NULL,
+    LOGGER  VARCHAR(max)   NULL,
+    LEVEL   VARCHAR(max)   NULL,
+    MESSAGE VARCHAR(max) NULL
    );
 
 GO

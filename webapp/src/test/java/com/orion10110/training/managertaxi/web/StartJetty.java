@@ -10,6 +10,7 @@ import org.eclipse.jetty.server.HttpConnectionFactory;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.webapp.WebAppContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * Separate startup class for people that want to run the examples directly. Use
@@ -57,5 +58,6 @@ public class StartJetty {
             e.printStackTrace();
             System.exit(100);
         }
+        
     }
 }
