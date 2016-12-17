@@ -16,15 +16,26 @@ public class AutoregisterFormatterRegistrar implements FormatterRegistrar {
      */
     @Autowired(required = false)
     @AutoRegistered
-    private List<TwoWayConverter<?, ?>> autoRegisteredConverters;
+    private List<TwoWayConverter<?, ?>> autoRegisteredTwoWayConverters;
+
+    @Autowired(required = false)
+    @AutoRegistered
+    private List<Converter<?, ?>> autoRegisteredConverters;
 
 
+    
     @Override
     public void registerFormatters(final FormatterRegistry registry) {
-        if (this.autoRegisteredConverters != null) {
-            for (TwoWayConverter<?, ?> converter : this.autoRegisteredConverters) {
+        if (this.autoRegisteredTwoWayConverters != null) {
+            for (TwoWayConverter<?, ?> converter : this.autoRegisteredTwoWayConverters) {
                 registry.addConverter(converter);
             }
         }
+        if (this.autoRegisteredConverters != null) {
+            for (Converter<?, ?> converter : this.autoRegisteredConverters) {
+                registry.addConverter(converter);
+            }
+        }
+        
     }
 }
