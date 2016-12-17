@@ -1,4 +1,4 @@
-package com.orion10110.training.managertaxi.web.lang;
+package com.orion10110.training.managertaxi.services.components;
 
 import java.util.List;
 import java.util.Locale;

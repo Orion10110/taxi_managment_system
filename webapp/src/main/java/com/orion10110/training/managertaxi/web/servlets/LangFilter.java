@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Locale.LanguageRange;
 
+import javax.inject.Inject;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -16,16 +17,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import com.orion10110.training.managertaxi.web.lang.UserDataLang;
-@Component
-public class LangFilter implements Filter {
+import com.orion10110.training.managertaxi.services.components.UserDataLang;
 
+public class LangFilter implements Filter {
+	@Inject
 	private UserDataLang userDataLang;
-	@Autowired
 	private ApplicationContext appContext;
 
 	@Override

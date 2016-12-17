@@ -22,7 +22,7 @@ import com.orion10110.taximanager.datamodel.Status;
 import com.orion10110.taximanager.datamodel.TypeCar;
 import com.orion10110.training.managertaxi.services.StatusService;
 import com.orion10110.training.managertaxi.services.TypeCarService;
-import com.orion10110.training.managertaxi.web.lang.UserDataLang;
+import com.orion10110.training.managertaxi.services.components.UserDataLang;
 import com.orion10110.training.managertaxi.web.model.BrandModel;
 import com.orion10110.training.managertaxi.web.model.StatusAbstractModel;
 import com.orion10110.training.managertaxi.web.model.StatusEnModel;

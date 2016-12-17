@@ -18,7 +18,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import com.orion10110.taximanager.datamodel.UserModel;
 import com.orion10110.training.managertaxi.services.components.UserDataToken;
 import com.orion10110.training.managertaxi.web.security.JwtAuthentication;
-@Component
+
 public class TokenAuthFilter implements Filter {
 
 	private UserDataToken userDataToken;

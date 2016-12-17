@@ -19,12 +19,12 @@ public class ConnectionFactory {
  
     private ConnectionFactory() {
         Properties properties = new Properties();
-        properties.setProperty("user", "admin");
-        properties.setProperty("password", "root"); // or get properties from some configuration file
+        properties.setProperty("user", "DB_A15413_taxi_admin");
+        properties.setProperty("password", "Misterion10110"); // or get properties from some configuration file
  
         GenericObjectPool pool = new GenericObjectPool();
         DriverManagerConnectionFactory connectionFactory = new DriverManagerConnectionFactory(
-                "jdbc:sqlserver://127.0.0.1:1433;databaseName=test_taxi_db;integrated security=false;", properties
+                "jdbc:sqlserver://SQL5030.SmarterASP.NET;databaseName=DB_A15413_taxi;integrated security=false;", properties
         );
         new PoolableConnectionFactory(
                 connectionFactory, pool, null, "SELECT 1", 3, false, false, Connection.TRANSACTION_READ_COMMITTED
