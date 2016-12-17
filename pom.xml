@@ -119,6 +119,15 @@
 			</dependency>
 
 			<!-- JETTY DEPENDENCIES -->
+			
+
+
+			<dependency>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-runner</artifactId>
+				<version>9.3.3.v20150827</version>
+			</dependency>
+
 			<dependency>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-server</artifactId>
@@ -272,15 +281,14 @@
 			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>javax.servlet-api</artifactId>
-				<version>3.0.1</version>
-				<scope>provided</scope>
+				<version>4.0.0-b01</version>
 			</dependency>
+
 
 		</dependencies>
 	</dependencyManagement>
 	<build>
-		<plugins>
-		</plugins>
+
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -298,7 +306,7 @@
 									<artifactItem>
 										<groupId>org.eclipse.jetty</groupId>
 										<artifactId>jetty-runner</artifactId>
-										<version>9.2.7.v20150116</version>
+										<version>9.3.3.v20150827</version>
 										<destFileName>jetty-runner.jar</destFileName>
 									</artifactItem>
 								</artifactItems>
