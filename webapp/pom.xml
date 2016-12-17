@@ -13,11 +13,7 @@
 	<packaging>war</packaging>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-runner</artifactId>
-		</dependency>
-
+		
 		<dependency>
 			<groupId>com.orion10110.training.managertaxi</groupId>
 			<artifactId>services</artifactId>
