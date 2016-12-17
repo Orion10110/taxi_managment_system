@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.orion10110.training.managertaxi</groupId>
@@ -21,7 +22,7 @@
 		<module>datamodel</module>
 		<module>services</module>
 		<module>webapp</module>
-  </modules>
+	</modules>
 	<dependencyManagement>
 		<dependencies>
 			<!-- Project modules -->
@@ -261,13 +262,20 @@
 			</dependency>
 
 
-			<!--  Auth -->
+			<!-- Auth -->
 			<dependency>
-			    <groupId>io.jsonwebtoken</groupId>
-			    <artifactId>jjwt</artifactId>
-			    <version>0.6.0</version>
+				<groupId>io.jsonwebtoken</groupId>
+				<artifactId>jjwt</artifactId>
+				<version>0.6.0</version>
 			</dependency>
-			
+
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>3.0.1</version>
+				<scope>provided</scope>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 	<build>
@@ -275,6 +283,29 @@
 		</plugins>
 		<pluginManagement>
 			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>2.3</version>
+					<executions>
+						<execution>
+							<phase>package</phase>
+							<goals>
+								<goal>copy</goal>
+							</goals>
+							<configuration>
+								<artifactItems>
+									<artifactItem>
+										<groupId>org.eclipse.jetty</groupId>
+										<artifactId>jetty-runner</artifactId>
+										<version>9.2.7.v20150116</version>
+										<destFileName>jetty-runner.jar</destFileName>
+									</artifactItem>
+								</artifactItems>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
 				<plugin>
 					<inherited>true</inherited>
 					<groupId>org.apache.maven.plugins</groupId>

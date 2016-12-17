@@ -21,7 +21,7 @@
 		</SMTP>
 
 
-		<JDBC name="databaseAppender" tableName="dbo.logs">
+	<!-- 	<JDBC name="databaseAppender" tableName="dbo.logs">
 			<ConnectionFactory
 				class="com.orion10110.training.managertaxi.services.util.ConnectionFactory"
 				method="getDatabaseConnection" />
@@ -30,7 +30,7 @@
 			<Column name="LOGGER" pattern="%logger" />
 			<Column name="MESSAGE" pattern="%msg%n" />
 
-		</JDBC>
+		</JDBC> -->
 	</Appenders>
 
 	<Loggers>
