@@ -22,6 +22,8 @@ import com.thoughtworks.xstream.XStream;
 @Repository
 public abstract class GenericDaoXmlImpl<T extends AbstractModel> implements GenericDao<T> {
 	
+	
+	
 	private XStream xstream;
 	private File file;
 

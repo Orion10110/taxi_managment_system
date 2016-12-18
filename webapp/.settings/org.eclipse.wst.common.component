@@ -19,7 +19,7 @@
         <dependent-module archiveName="dao-impl-xml-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/com.orion10110.training.managertaxi.dao-impl-xml-1.0.0/com.orion10110.training.managertaxi.dao-impl-xml-1.0.0">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <property name="java-output-path" value="/com.orion10110.training.managertaxi.webapp-1.0.0/target/classes"/>
         <property name="context-root" value="webapp"/>
-        <property name="java-output-path" value="/webapp/target/classes"/>
     </wb-module>
 </project-modules>
