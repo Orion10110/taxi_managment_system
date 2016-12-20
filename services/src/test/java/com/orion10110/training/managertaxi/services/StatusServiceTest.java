@@ -45,8 +45,8 @@ public class StatusServiceTest extends CrudTest<Status> {
 
 	@Override
 	public void changeTestObject(Status testObject) {
-		Random random = new Random();
-		testObject.setStatus(random.nextInt() + "");
+		Status st = context.getBean(Status.class);
+		testObject.setStatus(st.getStatus()+"t");
 	}
 
 	@Override

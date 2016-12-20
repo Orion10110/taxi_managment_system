@@ -39,8 +39,8 @@ public class StreetServiceTest extends CrudTest<Street> {
 
 	@Override
 	public void changeTestObject(Street testObject) {
-		Random random = new Random();
-		testObject.setName(random.nextInt() + "");
+		Street st = context.getBean(Street.class);
+		testObject.setName(st.getName());
 	}
 
 	@Override

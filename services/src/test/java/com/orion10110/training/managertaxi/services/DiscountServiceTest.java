@@ -38,9 +38,10 @@ public class DiscountServiceTest extends CrudTest<Discount> {
 
 	@Override
 	public void changeTestObject(Discount testObject) {
+		Discount ds = context.getBean(Discount.class);
 		Random random = new Random();
-		testObject.setName(random.nextInt() + "");
-		testObject.setDiscountPercent(random.nextInt());
+		testObject.setName(ds.getName());
+		testObject.setDiscountPercent(ds.getDiscountPercent());
 	}
 
 	@Override

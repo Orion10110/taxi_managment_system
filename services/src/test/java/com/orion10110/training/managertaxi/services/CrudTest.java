@@ -19,20 +19,21 @@ import org.springframework.transaction.annotation.Transactional;
 import com.orion10110.taximanager.datamodel.AbstractModel;
 
 public abstract class CrudTest<T extends AbstractModel> extends AbstractTest {
-
+	protected static int addTestValue=0;
+	
 	protected T testObject;
 
 	private Class<? extends T> testClass;
 
 	@Autowired
-	ApplicationContext context;
+	protected ApplicationContext context;
 
 	public CrudTest() {
 		Type t = getClass().getGenericSuperclass();
 		ParameterizedType pt = (ParameterizedType) t;
 		testClass = (Class) pt.getActualTypeArguments()[0];
 	}
-
+	
 	/**
 	 * Tests the CRUD(create, read, update, delete) operations.First, it inserts
 	 * the test object into database. Second, it retrieves the saved data and
@@ -49,21 +50,15 @@ public abstract class CrudTest<T extends AbstractModel> extends AbstractTest {
 		insert(testObject);
 		T selected = select(testObject.getId());
 		compare(selected, testObject);
-
 		changeTestObject(testObject);
 		update(testObject);
 		selected = select(testObject.getId());
 		compare(selected, testObject);
-
 		delete(testObject);
-
-		try {
-			selected = select(testObject.getId());
-			fail("Expected an EmptyResultDataAccessException to be thrown");
-		} catch (EmptyResultDataAccessException anEmptyResultDataAccessException) {
-
+		selected = select(testObject.getId());
+		if (selected!=null){
+			fail("Entity did't delet!!");
 		}
-
 	}
 
 	private List<T> createList() {
@@ -159,5 +154,9 @@ public abstract class CrudTest<T extends AbstractModel> extends AbstractTest {
 	 */
 	protected void setTestObject(T testObject) {
 		this.testObject = testObject;
+	}
+	
+	public static int getAddValue(){
+		return addTestValue++;
 	}
 }

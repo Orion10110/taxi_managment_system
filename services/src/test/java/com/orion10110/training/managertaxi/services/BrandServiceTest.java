@@ -38,8 +38,8 @@ public class BrandServiceTest extends CrudTest<Brand> {
 
 	@Override
 	public void changeTestObject(Brand testObject) {
-		Random random = new Random();
-		testObject.setName(random.nextLong() + "");
+		Brand br = context.getBean(Brand.class);
+		testObject.setName(br.getName());
 	}
 
 	@Override

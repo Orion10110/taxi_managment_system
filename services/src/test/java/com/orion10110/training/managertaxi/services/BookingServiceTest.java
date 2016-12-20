@@ -42,12 +42,11 @@ public class BookingServiceTest extends CrudTest<Booking> {
 
 	@Override
 	public void changeTestObject(Booking testObject) {
-		LocalDateTime loc = LocalDateTime.of(2015, 03, 13, 18, 30, 30);
-		Timestamp timestamp = Timestamp.valueOf(loc);
-		testObject.setDateOrder(timestamp);
-		testObject.setEndValue(111);
-		testObject.setStartValue(222);
-		testObject.setPhoneNumber("10-11-11");
+		Booking bk =context.getBean(Booking.class);
+		testObject.setDateOrder(bk.getDateOrder());
+		testObject.setEndValue(bk.getStartValue());
+		testObject.setStartValue(bk.getEndValue());
+		testObject.setPhoneNumber(bk.getPhoneNumber());
 
 	}
 

@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.orion10110.taximanager.datamodel.UserModel;
 import com.orion10110.training.managertaxi.services.components.UserDataToken;
-import com.orion10110.training.managertaxi.web.security.JwtAuthentication;
+import com.orion10110.training.managertaxi.services.security.JwtAuthentication;
+import com.orion10110.training.managertaxi.services.security.TokenAuthentication;
 
 public class TokenAuthFilter implements Filter {
 
@@ -25,13 +25,14 @@ public class TokenAuthFilter implements Filter {
 	@Autowired
 	private ApplicationContext appContext;
 	@Autowired
-	private JwtAuthentication jwtAuthentication;
+	private TokenAuthentication tokenAuthentication;
 
 	@Override
 	public void init(FilterConfig config) throws ServletException {
 		WebApplicationContext context = WebApplicationContextUtils
 				.getRequiredWebApplicationContext(config.getServletContext());
 		appContext = context;
+		tokenAuthentication =appContext.getBean(TokenAuthentication.class);
 	}
 
 	@Override
@@ -46,24 +47,21 @@ public class TokenAuthFilter implements Filter {
 		String header = req.getHeader("Authorization");
 
 		if (header == null || !header.startsWith("Bearer ")) {
-			userDataToken.setLoggedIn(false);
 			chain.doFilter(request, response);
 			return;
 		}
 
 		String authToken = header.substring(7);
 
-		UserModel user= jwtAuthentication.parseJWT(authToken);
+		UserModel user= tokenAuthentication.parse(authToken);
 		
 		if (user !=null) {
-			userDataToken.setLoggedIn(true);
 			userDataToken.setUserModel(user);
-			String usToken = jwtAuthentication.createJWT( user, 3600*60*5);
+			String usToken = tokenAuthentication.create( user, 3600*60*5);
 			res.setHeader("Authorization", "Bearer " + usToken);
 			chain.doFilter(request, response);
 			return;
 		} else {
-			userDataToken.setLoggedIn(false);
 			chain.doFilter(request, response);
 			return;
 		}

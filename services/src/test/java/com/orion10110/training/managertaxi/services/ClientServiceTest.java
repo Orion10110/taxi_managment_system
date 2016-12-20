@@ -38,11 +38,11 @@ public class ClientServiceTest extends CrudTest<Client> {
 
 	@Override
 	public void changeTestObject(Client testObject) {
-		Random random = new Random();
-		testObject.setSecondName(random.nextInt() + "");
-		testObject.setFirstName("TestFName");
-		testObject.setPatronymic("TestPatr");
-		testObject.setPhoneNumber("11-11-11");
+		Client cl = context.getBean(Client.class);
+		testObject.setSecondName(cl.getSecondName());
+		testObject.setFirstName(cl.getFirstName());
+		testObject.setPatronymic(cl.getPatronymic());
+		testObject.setPhoneNumber(cl.getPhoneNumber());
 	}
 
 	@Override

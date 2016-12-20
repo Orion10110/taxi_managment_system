@@ -17,7 +17,8 @@
 	
 	
 	<context:property-placeholder
-		ignore-unresolvable="true" location="classpath:db.properties" />
+		ignore-unresolvable="true" location="classpath:db2.properties" />
+
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">

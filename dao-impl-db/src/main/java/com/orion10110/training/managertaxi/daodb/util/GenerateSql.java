@@ -8,59 +8,96 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.orion10110.taximanager.datamodel.anotation.IgnoreField;
-
+/**
+ * Класс создание sql запросов по классам
+ * 
+ * @author Калач Артур
+ *
+ */
 public final class GenerateSql {
 
+	/**
+	 * Создание запроса insert
+	 * @param model type of class
+	 * @return строка запроса
+	 */
 	public static String generateSqlInsert(Class model) {
-
-		String dbName = UPPER_CAMEL.to(LOWER_UNDERSCORE, model.getSimpleName());
-
-		List<String> nameFields = getListField(model);
-		String insert = String.format("insert into %s (%s) values(:%s)", dbName,
-				UPPER_CAMEL.to(LOWER_UNDERSCORE, String.join(",", nameFields)), String.join(",:", nameFields));
+		List<String> nameFields = getListField(model); // Получение полей таблицы
+		String insert = String.format("insert into %s (%s) values(:%s)", getTableName(model),
+				UPPER_CAMEL.to(LOWER_UNDERSCORE, String.join(",", nameFields)),
+				String.join(",:", nameFields));
 		return insert;
 	}
+	
+	/**
+	 * Создание запроса update
+	 * @param model type of class
+	 * @return запрос Update
+	 */
+	public static String generateSqlUpdate(Class model) {
+		List<String> nameFields = getListField(model); //Получение имен полей
+		StringBuilder values = new StringBuilder();
+		for (String name : nameFields) {
+			values.append(UPPER_CAMEL.to(LOWER_UNDERSCORE, name));		//добавление имени поля таблицы
+			values.append(String.format("=:%s,", name));				//добавление значения
+		}
+		values.deleteCharAt(values.lastIndexOf(","));					//удаление последней запятой
+		return String.format("update %s set %s where id=:id",  getTableName(model), values);
+	}
 
+	/**
+	 * Создание запроса на удаление записи
+	 * @param model type of class
+	 * @return запрос Delete
+	 */
+	public static String generateSqlDelete(Class model) {
+		return String.format("delete from %s where id = ?",getTableName(model)); 
+	}
+
+	/**
+	 * Создание запроса Select
+	 * @param model  type of class
+	 * @return запрос Select
+	 */
+	public static String generateSqlSelect(Class model) {
+		return String.format("Select * from %s",getTableName(model));
+	}
+
+	/**
+	 * Создание запроса Select по id
+	 * @param model type of class
+	 * @return запрос Select by id
+	 */
+	public static String generateSqlGetId(Class model) {
+		String select = String.format("Select * from %s where id=?",getTableName(model));
+		return select;
+	}
+	/**
+	 * Получение имени таблицы
+	 * @param model type of class
+	 * @return имя таблицы
+	 */
+	private static String getTableName(Class model) {
+		return UPPER_CAMEL.to(LOWER_UNDERSCORE, model.getSimpleName());
+	}
+
+	/**
+	 * Получение имен полей
+	 * @param model type of class
+	 * @return список полей
+	 */
 	private static List<String> getListField(Class model) {
 		Field[] fields = model.getDeclaredFields();
 		List<String> vals = new ArrayList<>();
 
 		for (Field field : fields) {
-			if (field.getAnnotation(IgnoreField.class) == null) {
+			if (field.getAnnotation(IgnoreField.class) == null) { //Игнорируем поле при наличии анотации
 				vals.add(field.getName());
 			}
 
 		}
 		return vals;
 	}
-
-	public static String generateSqlUpdate(Class model) {
-		String dbName = UPPER_CAMEL.to(LOWER_UNDERSCORE, model.getSimpleName());
-		List<String> nameFields = getListField(model);
-		StringBuilder values = new StringBuilder();
-		for (String name : nameFields) {
-			values.append(UPPER_CAMEL.to(LOWER_UNDERSCORE, name));
-			values.append(String.format("=:%s,", name));
-		}
-		values.deleteCharAt(values.lastIndexOf(","));
-		String update = String.format("update %s set %s where id=:id", dbName, values);
-		return update;
-	}
-
-	public static String generateSqlDelete(Class model) {
-		String delete = String.format("delete from %s where id = ?",
-				UPPER_CAMEL.to(LOWER_UNDERSCORE, model.getSimpleName()));
-		return delete;
-	}
-
-	public static String generateSqlSelect(Class model) {
-		String select = String.format("Select * from %s", UPPER_CAMEL.to(LOWER_UNDERSCORE, model.getSimpleName()));
-		return select;
-	}
-
-	public static String generateSqlGetId(Class model) {
-		String select = String.format("Select * from %s where id=?",
-				UPPER_CAMEL.to(LOWER_UNDERSCORE, model.getSimpleName()));
-		return select;
-	}
+	
+	
 }

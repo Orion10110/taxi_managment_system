@@ -9,12 +9,21 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 import org.springframework.core.annotation.AliasFor;
-
+/**
+ * Анотация для удаления эллемента из списка кэша
+ * 
+ * @author Калач Артур
+ *
+ */
 @Documented
 @Inherited
 @Retention(RUNTIME)
 @Target(METHOD)
 public @interface ListCacheEvict {
+	/**
+	 * Имя кэша
+	 * @return имя кэша
+	 */
 	@AliasFor("cacheNames")
 	String value() default "";
 	

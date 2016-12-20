@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.orion10110.taximanager.datamodel.ApplicationUser;
 import com.orion10110.taximanager.datamodel.UserModel;
 import com.orion10110.training.managertaxi.services.ApplicationUserService;
+import com.orion10110.training.managertaxi.services.security.TokenAuthentication;
 import com.orion10110.training.managertaxi.web.model.LoginModel;
-import com.orion10110.training.managertaxi.web.security.JwtAuthentication;
 import com.orion10110.training.managertaxi.web.security.aspect.AllowAnonymous;
 
 @RestController
@@ -29,7 +29,7 @@ public class AccountController {
 	private ApplicationUserService service;
 
 	@Inject
-	private JwtAuthentication jwtAuthentication;
+	private TokenAuthentication tokenAuthentication;
 	
 	@AllowAnonymous
 	@RequestMapping(method = RequestMethod.POST)
@@ -40,7 +40,7 @@ public class AccountController {
 		}
 		HttpHeaders responseHeaders = new HttpHeaders();
 		UserModel us =conversionService.convert(user,UserModel.class);
-		String usToken = jwtAuthentication.createJWT( us, 3600*60*5);
+		String usToken = tokenAuthentication.create( us, 3600*60*5);
 		responseHeaders.set("Authorization", "Bearer " + usToken);
 		return new ResponseEntity<Void>(responseHeaders,HttpStatus.OK);
 	}

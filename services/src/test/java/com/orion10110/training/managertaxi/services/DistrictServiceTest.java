@@ -38,8 +38,8 @@ public class DistrictServiceTest extends CrudTest<District> {
 
 	@Override
 	public void changeTestObject(District testObject) {
-		Random random = new Random();
-		testObject.setName(random.nextInt() + "");
+		District ds = context.getBean(District.class);
+		testObject.setName(ds.getName());
 	}
 
 	@Override

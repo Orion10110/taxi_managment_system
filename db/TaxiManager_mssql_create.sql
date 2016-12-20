@@ -1,6 +1,6 @@
 CREATE TABLE [street] (
 	id integer NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	name varchar(128) NOT NULL,
+	name varchar(128) NOT NULL UNIQUE,
 	id_district integer NULL,
   
 
@@ -8,7 +8,7 @@ CREATE TABLE [street] (
 GO
 CREATE TABLE [district] (
 	id integer NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	name varchar(128) NOT NULL,
+	name varchar(128) NOT NULL UNIQUE,
   
 
 )
@@ -41,7 +41,7 @@ CREATE TABLE [driver] (
 GO
 CREATE TABLE [status] (
 	id integer NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	status varchar(64) NOT NULL,
+	status varchar(64) NOT NULL UNIQUE,
  	status_en varchar(64) NULL,
 )
 GO
@@ -65,8 +65,6 @@ CREATE TABLE [discount] (
 	id integer NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	name varchar(64) NOT NULL,
 	discount_percent integer NOT NULL,
- 
-
 )
 GO
 CREATE TABLE [car] (
@@ -75,18 +73,16 @@ CREATE TABLE [car] (
 	id_brand integer  NULL,
 	id_type integer  NULL,
 	place integer NOT NULL,
-	gos_number varchar(128) NOT NULL,
+	gos_number varchar(128) NOT NULL UNIQUE,
 	stars integer NOT NULL,
 	active bit NOT NULL,
-  
-
 )
 GO
 CREATE TABLE [application_user] (
 	id integer NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	email varchar(256) NOT NULL UNIQUE,
 	password_hash varchar(max) NOT NULL,
-	phone_number varchar(64) NOT NULL,
+	phone_number varchar(64) NULL,
 	user_name varchar(256) NOT NULL UNIQUE,
     role varchar(256),
 
@@ -95,14 +91,14 @@ CREATE TABLE [application_user] (
 GO
 CREATE TABLE [brand] (
 	id integer NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	name varchar(128) NOT NULL,
+	name varchar(128) NOT NULL UNIQUE,
  
 
 )
 GO
 CREATE TABLE [type_car] (
 	id integer NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	type varchar(128) NOT NULL,
+	type varchar(128) NOT NULL UNIQUE,
 	type_en varchar(64) NULL,
 
 )

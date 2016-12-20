@@ -16,12 +16,16 @@ public class ApplicationUserServiceImpl extends GenericServiceImpl<ApplicationUs
 	private void setDao(ApplicationUserDao applicationUserDao) {
 		setGenericDao(applicationUserDao);
 	}
-	
+
+	/**
+	 *  Авторизация пользоавтел
+	 *  @see com.orion10110.training.managertaxi.services.ApplicationUserService#validateUserPassword(java.lang.String, java.lang.String)
+	 */
 	@Override
     public ApplicationUser validateUserPassword(String userName,
             String password) {
 		ApplicationUserDao applicationUserDao =(ApplicationUserDao)genericDao;
-		ApplicationUser appUser = applicationUserDao.getByName(userName);
+		ApplicationUser appUser = applicationUserDao.getByName(userName); //Получение пользователя по имени
 		if(appUser!=null && password.equals(appUser.getPasswordHash())){
 			return appUser;
 		}

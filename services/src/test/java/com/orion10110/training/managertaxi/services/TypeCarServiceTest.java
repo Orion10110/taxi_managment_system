@@ -46,8 +46,8 @@ public class TypeCarServiceTest extends CrudTest<TypeCar> {
 
 	@Override
 	public void changeTestObject(TypeCar testObject) {
-		Random random = new Random();
-		testObject.setType(random.nextLong() + "");
+		TypeCar tc= context.getBean(TypeCar.class);
+		testObject.setType(tc.getType());
 
 	}
 

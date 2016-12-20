@@ -79,13 +79,15 @@ public class TypeCarController {
 	@RequestMapping(value = "/{typeCarId}", method = RequestMethod.GET)
 	public ResponseEntity<TypeCarAbstractModel> getById(@PathVariable Long typeCarId) {
 		TypeCar typeCar = service.get(typeCarId);
+		if(typeCar==null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		TypeCarAbstractModel ret = (TypeCarAbstractModel) conversionService.convert(typeCar, getLangClass());
 		return new ResponseEntity<TypeCarAbstractModel>(ret, HttpStatus.OK);
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> createNew(@RequestBody TypeCarModel typeCarModel) {
-		service.save(conversionService.convert(typeCarModel, TypeCar.class));
+		TypeCar tc=service.save(conversionService.convert(typeCarModel, TypeCar.class));
+		if(tc==null) return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
 
 	}
@@ -94,12 +96,13 @@ public class TypeCarController {
 	public ResponseEntity<Void> update(@RequestBody TypeCarModel typeCarModel, @PathVariable Long typeCarId) {
 		TypeCar typeCar = conversionService.convert(typeCarModel, TypeCar.class);
 		typeCar.setId(typeCarId);
-		service.save(typeCar);
+		TypeCar tc=service.save(typeCar);
+		if(tc==null) return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 
 	}
 
-	@RequestMapping(value = "/{statusId}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{typeCarId}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Long typeCarId) {
 		service.delete(typeCarId);
 		return new ResponseEntity<Void>(HttpStatus.OK);

@@ -4,7 +4,12 @@ import com.orion10110.taximanager.datamodel.ApplicationUser;
 import com.orion10110.taximanager.datamodel.UserModel;
 
 public interface ApplicationUserService extends GenericService<ApplicationUser> {
-
+	/**
+	 * Авторизация и получение данных пользователя
+	 * @param username имя пользователя
+	 * @param password пароль
+	 * @return экземпляр пользователя
+	 */
 	ApplicationUser validateUserPassword(String username, String password);
 
 }

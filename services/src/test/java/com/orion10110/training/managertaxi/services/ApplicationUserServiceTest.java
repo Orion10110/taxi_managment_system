@@ -38,11 +38,11 @@ public class ApplicationUserServiceTest extends CrudTest<ApplicationUser> {
 
 	@Override
 	public void changeTestObject(ApplicationUser testObject) {
-		Random random = new Random();
-		testObject.setEmail(random.nextInt() + "");
-		testObject.setPasswordHash(random.nextInt() + "");
-		testObject.setPhoneNumber(random.nextInt() + "");
-		testObject.setUserName(random.nextInt() + "");
+		ApplicationUser ap =context.getBean(ApplicationUser.class);
+		testObject.setEmail(ap.getEmail()+"t"+getAddValue());
+		testObject.setPasswordHash(ap.getPasswordHash()+"t"+getAddValue());
+		testObject.setPhoneNumber(ap.getPhoneNumber()+"t"+getAddValue());
+		testObject.setUserName(ap.getUserName()+"t"+getAddValue());
 	}
 
 	@Override

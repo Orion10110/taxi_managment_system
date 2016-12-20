@@ -1,33 +1,19 @@
 package com.orion10110.training.managertaxi.web.security.aspect;
 
-import java.lang.reflect.Method;
-import java.util.List;
-
 import javax.inject.Inject;
 
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.Cache;
-import org.springframework.cache.Cache.ValueWrapper;
 import org.springframework.cache.CacheManager;
-import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-import com.orion10110.taximanager.datamodel.AbstractModel;
-import com.orion10110.training.managertaxi.services.aspect.CacheList;
-import com.orion10110.training.managertaxi.services.aspect.ListCacheEvict;
-import com.orion10110.training.managertaxi.services.aspect.ListCachePut;
-import com.orion10110.training.managertaxi.services.components.UserDataStorage;
 import com.orion10110.training.managertaxi.services.components.UserDataToken;
-import com.orion10110.training.managertaxi.web.security.JwtAuthentication;
+import com.orion10110.training.managertaxi.services.security.JwtAuthentication;
 
 @Aspect
 @Component

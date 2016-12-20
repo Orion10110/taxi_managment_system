@@ -8,12 +8,20 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import org.springframework.core.annotation.AliasFor;
-
+/**
+ * Анотация для добавления и обновления записи в кэше
+ * @author Калач Артур
+ *
+ */
 @Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface ListCachePut {
+	/**
+	 * Имя кэша
+	 * @return Имя кэша
+	 */
 	@AliasFor("cacheNames")
 	String value() default "";
 	

@@ -16,6 +16,8 @@
 
 
 	<context:property-placeholder
+		ignore-unresolvable="true" location="classpath:db.properties" />
+	<context:property-placeholder
 		ignore-unresolvable="true" location="classpath:xml-db.properties" />
 
 	<context:component-scan

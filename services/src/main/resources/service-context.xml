@@ -22,6 +22,9 @@
 <!-- 	<import resource="classpath:xml-dao-bean.xml" />  -->
 	<import resource="classpath:service-cash.xml" />
 	<context:annotation-config />
+	<context:property-placeholder
+		ignore-unresolvable="true" location="classpath:security.properties" />
+	
 	
 	<context:component-scan base-package="com.orion10110.training.managertaxi.services" />
 	

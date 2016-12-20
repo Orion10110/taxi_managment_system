@@ -4,19 +4,18 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.orion10110.taximanager.datamodel.UserModel;
-
+/**
+ * Хранение токена
+ * 
+ * @author Калач Артур
+ *
+ */
 @Component
 @Scope(value = "request")
 public class UserDataToken {
-	    private boolean isLoggedIn;
-	 	
 	    private UserModel userModel;
 	    public boolean isLoggedIn() {
-	        return isLoggedIn;
-	    }
-
-	    public void setLoggedIn(boolean isLoggedIn) {
-	        this.isLoggedIn = isLoggedIn;
+	        return userModel!=null;
 	    }
 
 		public UserModel getUserModel() {

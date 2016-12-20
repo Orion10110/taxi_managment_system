@@ -10,6 +10,7 @@ import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.orion10110.taximanager.datamodel.Brand;
 import com.orion10110.taximanager.datamodel.Car;
 
 public class CarServiceTest extends CrudTest<Car> {
@@ -38,12 +39,12 @@ public class CarServiceTest extends CrudTest<Car> {
 
 	@Override
 	public void changeTestObject(Car testObject) {
-		Random random = new Random();
-		testObject.setName(random.nextInt(500) + "");
-		testObject.setPlace(random.nextInt(500));
-		testObject.setStars(random.nextInt(500));
-		testObject.setActive(random.nextBoolean());
-		testObject.setGosNumber(random.nextInt(500) + "");
+		Car cr = context.getBean(Car.class);
+		testObject.setName(cr.getName());
+		testObject.setPlace(cr.getPlace());
+		testObject.setStars(cr.getStars());
+		testObject.setActive(cr.getActive());
+		testObject.setGosNumber(cr.getGosNumber());
 
 	}
 

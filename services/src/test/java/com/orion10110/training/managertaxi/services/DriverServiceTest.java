@@ -42,18 +42,14 @@ public class DriverServiceTest extends CrudTest<Driver> {
 
 	@Override
 	public void changeTestObject(Driver testObject) {
-		Random random = new Random();
-		testObject.setSecondName(random.nextInt()+"");
-		testObject.setFirstName(random.nextInt()+"");
-		testObject.setPatronymic(random.nextInt()+"");
-		testObject.setPhoneNumber(random.nextInt()+"");
-		LocalDateTime timeBirth = LocalDateTime.of(1990, 10, 12, 23, 33, 10);
-		Timestamp timestampBirth = Timestamp.valueOf(timeBirth);
-		testObject.setDateOfBirth(timestampBirth);
-		LocalDateTime timeEmploye = LocalDateTime.of(2015, 10, 12, 23, 33, 10);
-		Timestamp timestampEmploye = Timestamp.valueOf(timeEmploye);
-		testObject.setDateOfEmployment(timestampEmploye);
-		testObject.setCategory(random.nextInt());
+		Driver dr = context.getBean(Driver.class);
+		testObject.setSecondName(dr.getSecondName());
+		testObject.setFirstName(dr.getFirstName());
+		testObject.setPatronymic(dr.getPatronymic());
+		testObject.setPhoneNumber(dr.getPhoneNumber());
+		testObject.setDateOfBirth(dr.getDateOfBirth());
+		testObject.setDateOfEmployment(dr.getDateOfEmployment());
+		testObject.setCategory(dr.getCategory());
 	}
 
 	@Override
