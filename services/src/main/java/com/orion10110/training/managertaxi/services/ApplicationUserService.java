@@ -1,7 +1,6 @@
 package com.orion10110.training.managertaxi.services;
 
 import com.orion10110.taximanager.datamodel.ApplicationUser;
-import com.orion10110.taximanager.datamodel.UserModel;
 
 public interface ApplicationUserService extends GenericService<ApplicationUser> {
 	/**
@@ -11,5 +10,7 @@ public interface ApplicationUserService extends GenericService<ApplicationUser> 
 	 * @return экземпляр пользователя
 	 */
 	ApplicationUser validateUserPassword(String username, String password);
+
+	boolean accessToChange(String appM);
 
 }

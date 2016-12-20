@@ -12,29 +12,20 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.orion10110.taximanager.datamodel.Brand;
-import com.orion10110.taximanager.datamodel.Status;
 import com.orion10110.taximanager.datamodel.TypeCar;
-import com.orion10110.training.managertaxi.services.StatusService;
 import com.orion10110.training.managertaxi.services.TypeCarService;
 import com.orion10110.training.managertaxi.services.components.UserDataLang;
-import com.orion10110.training.managertaxi.web.model.BrandModel;
-import com.orion10110.training.managertaxi.web.model.StatusAbstractModel;
-import com.orion10110.training.managertaxi.web.model.StatusEnModel;
-import com.orion10110.training.managertaxi.web.model.StatusModel;
-import com.orion10110.training.managertaxi.web.model.StatusStandardLangModel;
 import com.orion10110.training.managertaxi.web.model.TypeCarAbstractModel;
 import com.orion10110.training.managertaxi.web.model.TypeCarEnModel;
 import com.orion10110.training.managertaxi.web.model.TypeCarModel;
 import com.orion10110.training.managertaxi.web.model.TypeCarStandardLangModel;
 
 @RestController
-@RequestMapping("/type_car")
+@RequestMapping("/type_cars")
 public class TypeCarController {
 	@Inject
 	private ApplicationContext context;

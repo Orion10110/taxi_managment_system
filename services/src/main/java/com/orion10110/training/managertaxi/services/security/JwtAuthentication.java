@@ -46,7 +46,6 @@ public class JwtAuthentication implements TokenAuthentication{
 	    //We will sign our JWT with our ApiKey secret
 	    byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(key); 
 	    Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
-	 
 	    //Let's set the JWT Claims
 	    JwtBuilder builder = Jwts.builder().setId(user.getId().toString())
 	                                .setIssuedAt(now)

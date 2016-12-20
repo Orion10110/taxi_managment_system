@@ -31,6 +31,8 @@ public class SecurityAspect {
 	// @Autowired
 	// private UserDataToken userDataToken;
 
+	
+	
 	@Around("@annotation(authAccess)")
 	public ResponseEntity authAccess(ProceedingJoinPoint joinPoint, AuthAccess authAccess) throws Throwable {
 		UserDataToken userDataToken = context.getBean(UserDataToken.class);

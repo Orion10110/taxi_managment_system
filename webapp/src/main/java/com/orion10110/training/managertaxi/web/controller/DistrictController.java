@@ -7,7 +7,7 @@ import com.orion10110.taximanager.datamodel.District;
 import com.orion10110.training.managertaxi.services.DistrictService;
 import com.orion10110.training.managertaxi.web.model.DistrictModel;
 @RestController
-@RequestMapping("/district")
+@RequestMapping("/districts")
 public class DistrictController extends GenericController<DistrictService,District,DistrictModel> {
 
 }
