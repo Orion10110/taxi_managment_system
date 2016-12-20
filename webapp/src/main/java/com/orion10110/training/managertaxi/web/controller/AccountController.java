@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.orion10110.taximanager.datamodel.ApplicationUser;
-import com.orion10110.taximanager.datamodel.Brand;
 import com.orion10110.taximanager.datamodel.UserModel;
 import com.orion10110.training.managertaxi.services.ApplicationUserService;
 import com.orion10110.training.managertaxi.services.security.TokenAuthentication;
@@ -53,7 +52,7 @@ public class AccountController {
 	
 	
 	@AuthAccess
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(value="/register",method = RequestMethod.POST)
 	public ResponseEntity<Void> create(@RequestBody ApplicationUserModel appM) {
 		if(!service.accessToChange(appM.getUserName())) return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		ApplicationUser aM = service.save(conversionService.convert(appM, ApplicationUser.class));
