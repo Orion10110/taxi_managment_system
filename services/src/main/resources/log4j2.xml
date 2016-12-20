@@ -15,7 +15,7 @@
 			</Policies>
 		</RollingFile>
 		<SMTP name="Mail" subject="Error Log" to="artut.kalach@gmail.com"
-			from="pojasoriona@gmail.com" smtpHost="smtp.gmail.com" smtpPassword="misterion10110"
+			from="pojasoriona@gmail.com" smtpHost="smtp.gmail.com" smtpPassword=""
 			smtpUsername="pojasoriona@gmail.com" smtpProtocol="smtps" smtpPort="465"
 			bufferSize="1000">
 		</SMTP>
